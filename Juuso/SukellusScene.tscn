@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwmlkgk03aq12"]
+
+[ext_resource type="Texture2D" uid="uid://nyx440hj7hwq" path="res://Juuso/Assets/Sukellusvene.png" id="1_ksyyn"]
+[ext_resource type="PackedScene" uid="uid://dym872m3tsoq5" path="res://Juuso/Ui test.tscn" id="2_ijuny"]
+
+[node name="SukellusScene" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Vene" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Vene"]
+texture = ExtResource("1_ksyyn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control2" parent="CanvasLayer" instance=ExtResource("2_ijuny")]
