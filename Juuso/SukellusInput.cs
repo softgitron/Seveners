@@ -3,24 +3,27 @@ using System;
 
 public partial class SukellusInput : Node2D
 {
-	private int depth = 0;
-	
-	private Node pintavesi;
+	private int sukellustaso = 0;
+
+	private CanvasItem pintavesi;
+	private ProgressBar syvyysmittari;
 
 	public override void _Ready(){
-		pintavesi = GetNode<Node>("pintavesi");
-}
-	public override void _Process(float delta){
+		pintavesi = GetNode<CanvasItem>("pintavesi");
+		syvyysmittari = GetNode<ProgressBar>("CanvasLayer/Control2/ColorRect/ProgressBar");
+	}
+	public override void _Process(double delta){
 		if (Input.IsActionPressed("ui_down")){
-			value++;
+			sukellustaso++;
 		} else if (Input.IsActionPressed("ui_up")){
-			value--;
+			sukellustaso--;
 		}
-		if (value > 10){
+		if (sukellustaso > 10){
 			pintavesi.Visible = false;
 		} else {
 			pintavesi.Visible = true;
 		}
-		GD.Print("Current value: ",value);
+		syvyysmittari.Value = sukellustaso;
+		GD.Print("Current value: ",sukellustaso);
 	}
 }
