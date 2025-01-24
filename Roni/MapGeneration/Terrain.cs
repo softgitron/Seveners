@@ -8,8 +8,8 @@ public partial class Terrain : TileMapLayer
 	[Export]
 	int MAP_SIZE_Y = 512;
 	const double GLANURARITY = 0.03;
-	const double SEABED_UPPER_BOUNDARY = -0.8;
-	const double ROCK_UPPER_BOUNDARY = 0.1;
+	const double SEABED_UPPER_BOUNDARY = -0.4;
+	const double ROCK_UPPER_BOUNDARY = -0.1;
 	const double SEA_UPPER_BOUNDARY = 0.7;
 	public readonly Vector2I SEABED = new Vector2I(0, 0);
 	public readonly Vector2I ROCK = new Vector2I(1, 0);
