@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d34em5aymnxn8"]
+[gd_scene load_steps=13 format=3 uid="uid://6smyb87bxo7n"]
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/MapTileMapTexture.png" id="1_fos0i"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="2_3dxm6"]
@@ -52,8 +52,9 @@ sources/0 = SubResource("TileSetAtlasSource_5vw27")
 shader = ExtResource("3_lgr22")
 shader_parameter/isUnderWater = false
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_272bh"]
-radius = 90.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_272bh"]
+radius = 36.0
+height = 230.0
 
 [node name="Main2" type="Node2D"]
 
@@ -77,13 +78,14 @@ belowWater = NodePath("../Under Water")
 
 [node name="Goal" type="Area2D" parent="."]
 position = Vector2(14, 48)
+collision_mask = 2
 
 [node name="GoalSprite" type="Sprite2D" parent="Goal"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_272bh")
 
 [node name="GoalCollider" type="CollisionShape2D" parent="Goal"]
-shape = SubResource("CircleShape2D_272bh")
+shape = SubResource("CapsuleShape2D_272bh")
 
 [node name="MainGameLogic" type="Node2D" parent="." node_paths=PackedStringArray("Terrain", "Player", "Goal", "AboveWater", "BelowWater")]
 script = ExtResource("7_272bh")

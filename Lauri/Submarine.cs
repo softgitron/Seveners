@@ -102,6 +102,7 @@ public partial class Submarine : CharacterBody2D
 		Depth = depth;
 		isAboveWater = !isAboveWater;
 		aboveMaterial.SetShaderParameter("isUnderWater", !isAboveWater);
+        aboveWater.CollisionEnabled = isAboveWater;
 		belowWater.CollisionEnabled = !isAboveWater; // This causes lag spike! TODO: Maybe better approach would be to change what colliders player reacts to (so no hiding colliders)
 		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Visible = isAboveWater;
 	}
