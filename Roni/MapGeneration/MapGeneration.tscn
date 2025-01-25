@@ -1039,7 +1039,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_liryv")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jsn6o"]
-fractal_octaves = 3
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_liryv"]
 noise = SubResource("FastNoiseLite_jsn6o")
