@@ -1,16 +1,20 @@
 ﻿<Properties>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Tomi/FloatingEntity.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Tomi/EnemySpawnerService.cs">
     <Files>
-      <File FileName="Tomi/FloatingEntity.cs" Line="4" Column="28" />
+      <File FileName="Tomi/FloatingEntity.cs" Line="4" Column="1" />
+      <File FileName="Tomi/AiEntity.cs" Line="35" Column="34" />
+      <File FileName="Roni/MapGeneration/Terrain.cs" Line="74" Column="24" />
+      <File FileName="Tomi/EnemySpawnerService.cs" Line="88" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Seveners">
             <Node name="Seveners">
-              <Node name="Tomi" expanded="True">
-                <Node name="FloatingEntity.cs" selected="True" />
+              <Node name="Tomi">
+                <Node name="EnemySpawnerService.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -18,7 +22,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

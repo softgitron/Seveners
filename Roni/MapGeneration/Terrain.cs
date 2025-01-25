@@ -71,7 +71,32 @@ public partial class Terrain : TileMapLayer
 		return true;
 	}
 
-	private bool Generate()
+	public bool CanSpawnOn(Vector2 position)
+	{
+		var terrainCoordinates = WorldCoordinateToTerrainCoordinate(position);
+		var isPointSolid = NavigationAgent.IsPointSolid(terrainCoordinates);
+
+		if (isPointSolid)
+			return false;
+		return true;
+	}
+
+    public Vector2I WorldCoordinateToTerrainCoordinate(Vector2 globalCoordinate)
+    {
+        var localPosition = this.ToLocal(globalCoordinate);
+        var terrainCoordinate = this.LocalToMap(localPosition);
+        return terrainCoordinate;
+    }
+
+    public Vector2 TerrainCoordinateToWorldCoordinate(Vector2 terrainCoordinate)
+    {
+        var terrainInterface = (Vector2I)terrainCoordinate;
+        var localPosition = this.MapToLocal(terrainInterface);
+        var globalPosition = this.ToGlobal(localPosition);
+        return globalPosition;
+    }
+
+    private bool Generate()
 	{
 		for (var y = 0; y < Height; y++)
 		{

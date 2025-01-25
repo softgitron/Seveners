@@ -15,18 +15,24 @@ public partial class AiEntity : CharacterBody2D
 	public Marker2D _movementTarget;
 	[Export]
 	public Path2D _path;
+	[Export]
+	public Terrain terrain;
 
 	private const float CorrectionAngle = (float)Math.PI / 2;
 	private bool HasReachedDestination = false;
-
-	private Terrain terrain;
 	private List<Vector2> navigationPoints = [];
 	private Vector2 currentNavigationTarget;
 
 	public override void _Ready()
 	{
+		if (_movementTarget == null)
+		{
+			_movementTarget = new Marker2D();
+			AssignNewTarget();
+			SetMovementTarget();
+		}
 		CallDeferred("SetMovementTarget");
-		terrain = GetNode<Terrain>("../../Above Water");
+		terrain = GetNode<Terrain>("../../../Above Water");
 	}
 
 	public void SetMovementTarget()
@@ -72,8 +78,6 @@ public partial class AiEntity : CharacterBody2D
 		var random = new Random();
 		var newTargetForPatrol = GlobalPosition;
 
-
-
 		while (!isTargetValid)
 		{
 			var wayPointDistance = random.Next(1, (int)Math.Round(500 * _randomWaypointDistanceMultiplier, 0));
@@ -92,6 +96,11 @@ public partial class AiEntity : CharacterBody2D
 				isTargetValid = true;
 			}
         }
+
+		if (_movementTarget == null)
+		{
+
+		}
 		_movementTarget.GlobalPosition = newTargetForPatrol;
     }
 
