@@ -29,14 +29,16 @@ public partial class ShipNode : CharacterBody2D
 	public float SteerAngle = 0.005f;
 	[Export] TileMapLayer aboveWater;
 	[Export] TileMapLayer belowWater;
+	private ShaderMaterial aboveMaterial;
 
 	private Vector2 _currentDirection;
-
+	private bool isAboveWater = true;
 	private Vector2 up = new Vector2(0, -1);
 
 	public override void _Ready()
 	{
 		_currentDirection = new Vector2(0, -1);
+		aboveMaterial = (ShaderMaterial)aboveWater.Material;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -55,12 +57,14 @@ public partial class ShipNode : CharacterBody2D
 
 	private void _HandleInput(double delta)
 	{
+        // Switching above/below water
 		bool switchLayer = Input.IsActionJustPressed("surface");
-
 		if (switchLayer){
-			aboveWater.Enabled = !aboveWater.Enabled;
-			belowWater.CollisionEnabled = !aboveWater.Enabled;
+			isAboveWater = !isAboveWater;
+			aboveMaterial.SetShaderParameter("isUnderWater", !isAboveWater);
+			belowWater.CollisionEnabled = !isAboveWater; // This causes lag spike! TODO: Maybe better approach would be to change what colliders player reacts to (so no hiding colliders)
 		}
+
 		bool powerUp = Input.IsActionJustPressed("power_up");
 		bool powerDown = Input.IsActionJustPressed("power_down");
 
