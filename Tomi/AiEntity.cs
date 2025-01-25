@@ -6,6 +6,8 @@ using System.Linq;
 public partial class AiEntity : CharacterBody2D
 {
 	[Export]
+	public float _randomWaypointDistanceMultiplier = 1;
+	[Export]
 	public float _movementSpeed = 1000f;
 	[Export]
 	public float _turnSpeed = 0.01f;
@@ -15,6 +17,7 @@ public partial class AiEntity : CharacterBody2D
 	public Path2D _path;
 
 	private const float CorrectionAngle = (float)Math.PI / 2;
+	private bool HasReachedDestination = false;
 
 	private Terrain terrain;
 	private List<Vector2> navigationPoints = [];
@@ -23,7 +26,7 @@ public partial class AiEntity : CharacterBody2D
 	public override void _Ready()
 	{
 		CallDeferred("SetMovementTarget");
-		terrain = GetNode<Terrain>("../MapGeneration/Above Water");
+		terrain = GetNode<Terrain>("../../Above Water");
 	}
 
 	public void SetMovementTarget()
@@ -35,6 +38,17 @@ public partial class AiEntity : CharacterBody2D
 		navigationPoints = [.. mapNavigationPoints.Select(TerrainCoordinateToWorldCoordinate)];
 		currentNavigationTarget = navigationPoints[0];
 		navigationPoints.RemoveAt(0);
+	}
+
+	private Vector2 GetRandomWaypointForDistance(float distanceToWaypoint)
+	{
+		var random = new Random();
+        var randomCirclePoint = random.Next(0, 360);
+
+        var randomXValue = distanceToWaypoint * Math.Cos(randomCirclePoint);
+        var randomYValue = distanceToWaypoint * Math.Sin(randomCirclePoint);
+
+        return new Vector2((float)randomXValue, (float)randomYValue);
 	}
 
 	private Vector2I WorldCoordinateToTerrainCoordinate(Vector2 globalCoordinate)
@@ -52,10 +66,41 @@ public partial class AiEntity : CharacterBody2D
 		return globaPosition;
 	}
 
+	private void AssignNewTarget()
+	{
+		var isTargetValid = false;
+		var random = new Random();
+		var newTargetForPatrol = GlobalPosition;
+
+
+
+		while (!isTargetValid)
+		{
+			var wayPointDistance = random.Next(1, (int)Math.Round(500 * _randomWaypointDistanceMultiplier, 0));
+
+			newTargetForPatrol = GetRandomWaypointForDistance(wayPointDistance);
+
+			if (!terrain.validateMapBounds(newTargetForPatrol))
+			{
+				continue;
+			};
+
+            var mapNavigationPoints = terrain.NavigationAgent.GetPointPath(WorldCoordinateToTerrainCoordinate(GlobalPosition), WorldCoordinateToTerrainCoordinate(newTargetForPatrol), false);
+
+			if (mapNavigationPoints.Length != 0)
+			{
+				isTargetValid = true;
+			}
+        }
+		_movementTarget.GlobalPosition = newTargetForPatrol;
+    }
+
 	public override void _PhysicsProcess(double delta)
 	{
 		if (navigationPoints.Count == 0)
 		{
+			AssignNewTarget();
+			SetMovementTarget();
 			return;
 		}
 
