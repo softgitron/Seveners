@@ -6,10 +6,16 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtmlg"]
 shader = ExtResource("1_g4vns")
+shader_parameter/isUnderWater = true
+shader_parameter/waterColor = Color(0.0967328, 0.334114, 1, 1)
+shader_parameter/landColor = Color(1.44392e-07, 0.529095, 2.5028e-06, 1)
+shader_parameter/sandColor = Color(0.697857, 0.538853, 0.264455, 1)
+shader_parameter/deepWaterColor = Color(0.00613118, 0.208302, 0.904348, 1)
+shader_parameter/bottomColor = Color(0.10567, 0.143481, 0.264275, 1)
+shader_parameter/oceanColor = Color(0.106664, 0.171807, 0.423029, 1)
+shader_parameter/wallsColor = Color(0, 0, 0, 1)
 
 [node name="NoiseTesti" type="Node2D"]
-
-[node name="Noise" type="Node2D" parent="."]
 
 [node name="NoiseDisplay" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_dtmlg")
