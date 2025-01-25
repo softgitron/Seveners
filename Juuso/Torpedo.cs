@@ -9,11 +9,12 @@ public partial class Torpedo : CharacterBody2D
 	float lifetime = 10;
 	public override void _Ready()
 	{
+		base._Ready();
 		GlobalPosition = pos;
 		GlobalRotation = rotation;
-		base._Ready();
 	}
-	public void Initialize(Vector2 pos, float rotation){
+	public void Initialize(Vector2 pos, float rotation)
+	{
 		GlobalRotation = rotation;
 		GlobalPosition = pos;
 	}
@@ -21,8 +22,10 @@ public partial class Torpedo : CharacterBody2D
 	{
 		var vel = new Vector2(0, -speed).Rotated(direction);
 		var collision = MoveAndCollide(vel * (float)delta);
-		if (collision != null) {
-			if (collision.GetCollider() is Submarine){
+		if (collision != null)
+		{
+			if (collision.GetCollider() is Submarine)
+			{
 				var player = (Submarine)collision.GetCollider();
 				player.TakeDamage(10);
 			}
@@ -32,7 +35,8 @@ public partial class Torpedo : CharacterBody2D
 	public override void _Process(double delta)
 	{
 		lifetime -= (float)delta;
-		if (lifetime < 0) {
+		if (lifetime < 0)
+		{
 			QueueFree();
 		}
 	}

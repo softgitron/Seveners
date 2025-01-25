@@ -2,8 +2,8 @@ using Godot;
 
 public partial class Terrain : TileMapLayer
 {
-	public const int Width = 1024;
-	public const int Height = 1024;
+	public const int Width = 512;
+	public const int Height = 512;
 	[Export] public bool UnderTheWater = false;
 	[Export] public int SafetyLimit = 10;
 
