@@ -136,6 +136,13 @@ public partial class Submarine : CharacterBody2D
 		//Debug.Print("CurrentMaxRpm changed to: " + CurrentMaxRpm.ToString());
 	}
 
+	public void Reset()
+	{
+		CurrentGear = 1;
+		CurrentRpm = 0;
+		Velocity = Vector2.Zero;
+	}
+
 	private void _on_timer_timeout()
 	{
 		//Debug.Print("ShipNode timer timed out");
