@@ -55,11 +55,18 @@ public partial class Submarine : CharacterBody2D
 	protected Vector2 up = new Vector2(0, -1);
 	private Vector2 zero = new Vector2(0, 0);
 
+    private float health = 100;
 	public override void _Ready()
 	{
 		_currentDirection = new Vector2(0, -1);
 		aboveMaterial = (ShaderMaterial)aboveWater.Material;
 	}
+
+    [Signal] public delegate void HealthCangedEventHandler(float newHealth);
+    public void TakeDamage(float damage){
+        health -= damage;
+        EmitSignal(SignalName.HealthCanged, health);
+    }
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -83,6 +90,8 @@ public partial class Submarine : CharacterBody2D
 		if (collision != null)
 		{
 			GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
+            TakeDamage(5);
+            Velocity = -Velocity * 0.5f;
 		}
 	}
 
