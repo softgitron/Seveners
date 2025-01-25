@@ -68,6 +68,6 @@ tile_set = SubResource("TileSet_jj57x")
 script = ExtResource("1_o8uow")
 
 [node name="HumanControllableSubmarine" parent="." node_paths=PackedStringArray("aboveWater", "belowWater") instance=ExtResource("3_liryv")]
-position = Vector2(587, 329)
+position = Vector2(747, 721)
 aboveWater = NodePath("../Above Water")
 belowWater = NodePath("../Under Water")
