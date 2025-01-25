@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://p1odjpqw57v1"]
+[gd_scene load_steps=6 format=3 uid="uid://d0kam6gaohofj"]
 
 [ext_resource type="PackedScene" uid="uid://sfu7ef1bosj4" path="res://Roni/MapGeneration/MapGeneration.tscn" id="1_clu67"]
 [ext_resource type="Script" uid="uid://dadk78pog2vxq" path="res://Tomi/AiEntity.cs" id="2_17bvu"]

@@ -56,6 +56,5 @@ collision_enabled = false
 script = ExtResource("1_o8uow")
 
 [node name="Above Water" type="TileMapLayer" parent="."]
-material = SubResource("ShaderMaterial_eahct")
 tile_set = SubResource("TileSet_jj57x")
 script = ExtResource("1_o8uow")
