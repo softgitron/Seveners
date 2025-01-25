@@ -8,9 +8,11 @@ public partial class Submarine : CharacterBody2D
 {
 
 	[Export]
-	public double Weight = 100;
+	public float Weight = 100;
 	[Export]
-	public float CurrentSpeed = 0.0f;
+	public float WaterResistance = 0.9f;
+	[Export]
+	public float CurrentPropulsionForce = 0.0f;
 	[Export]
 	public float CurrentRpm = 0.0f;
 	[Export]
@@ -49,6 +51,7 @@ public partial class Submarine : CharacterBody2D
 	protected Vector2 _currentDirection;
 
 	protected Vector2 up = new Vector2(0, -1);
+	private Vector2 zero = new Vector2(0, 0);
 
 	public override void _Ready()
 	{
@@ -61,9 +64,15 @@ public partial class Submarine : CharacterBody2D
 		base._PhysicsProcess(delta);
 
 		// Update movement params:
-		CurrentSpeed = Math.Sign(CurrentGear) * CurrentRpm;
+		CurrentPropulsionForce = Math.Sign(CurrentGear) * CurrentRpm;
+		//Debug.Print("CurrentPropulsionForce: " + CurrentPropulsionForce.ToString());
+		Vector2 currentPropulsionVector = _currentDirection * CurrentPropulsionForce;
+		Vector2 interpolatedResistedVelocity = Velocity.Lerp(currentPropulsionVector, (float)delta * WaterResistance);
+		//Debug.Print("currentPropulsionVector: " + currentPropulsionVector.ToString());
+		//Debug.Print("interpolatedResistedVelocity: " + interpolatedResistedVelocity.ToString());
 
-		Velocity = _currentDirection * CurrentSpeed;
+		Velocity = interpolatedResistedVelocity;
+		//Debug.Print("Vel: " + Velocity.ToString());
 		Rotation = -_currentDirection.AngleTo(up);
 
 		// Using MoveAndCollide.
