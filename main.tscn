@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://6smyb87bxo7n"]
+[gd_scene load_steps=13 format=3 uid="uid://6smyb87bxo7n"]
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/MapTileMapTexture.png" id="1_fos0i"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="2_3dxm6"]
 [ext_resource type="Shader" uid="uid://d03fqs570k6o4" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
 [ext_resource type="PackedScene" uid="uid://dn8jjea5g51u2" path="res://Lauri/MainSub.tscn" id="4_trn2v"]
 [ext_resource type="PackedScene" uid="uid://dn343gw0u6o7p" path="res://Roni/Enemy.tscn" id="5_03owx"]
+[ext_resource type="Texture2D" uid="uid://blnrlp5di758c" path="res://Aku/splash.png" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://e6nr6geoy303" path="res://Roni/MainGameLogic.cs" id="7_272bh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsn6o"]
 vertices = PackedVector2Array(3, 3, -3, 3, -3, -3, 3, -3)
@@ -55,7 +57,10 @@ sources/0 = SubResource("TileSetAtlasSource_5vw27")
 shader = ExtResource("3_lgr22")
 shader_parameter/isUnderWater = false
 
-[node name="Main" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_272bh"]
+radius = 90.0
+
+[node name="Main2" type="Node2D"]
 
 [node name="Under Water" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_kek77")
@@ -74,3 +79,23 @@ aboveWater = NodePath("../Above Water")
 belowWater = NodePath("../Under Water")
 
 [node name="Enemy" parent="." instance=ExtResource("5_03owx")]
+
+[node name="Goal" type="Area2D" parent="."]
+position = Vector2(14, 48)
+
+[node name="GoalSprite" type="Sprite2D" parent="Goal"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("6_7mycd")
+
+[node name="GoalCollider" type="CollisionShape2D" parent="Goal"]
+shape = SubResource("CircleShape2D_272bh")
+
+[node name="MainGameLogic" type="Node2D" parent="." node_paths=PackedStringArray("Terrain", "Player", "Goal", "AboveWater", "BelowWater")]
+script = ExtResource("7_272bh")
+Terrain = NodePath("../Above Water")
+Player = NodePath("../Player")
+Goal = NodePath("../Goal")
+AboveWater = NodePath("../Above Water")
+BelowWater = NodePath("../Under Water")
+
+[connection signal="body_entered" from="Goal" to="MainGameLogic" method="_on_goal_body_entered"]

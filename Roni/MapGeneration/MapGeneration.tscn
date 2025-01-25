@@ -60,8 +60,8 @@ shader_parameter/isUnderWater = false
 tile_set = SubResource("TileSet_jj57x")
 collision_enabled = false
 script = ExtResource("1_o8uow")
-SafetyLimit = 60
 UnderTheWater = true
+SafetyLimit = 60
 
 [node name="Above Water" type="TileMapLayer" parent="."]
 material = SubResource("ShaderMaterial_jj57x")

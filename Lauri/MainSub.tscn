@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dn8jjea5g51u2"]
 
-[ext_resource type="Script" path="res://Lauri/HumanControllableSubmarine.cs" id="1_g8j3o"]
+[ext_resource type="Script" uid="uid://bs1yskhl7rvm0" path="res://Lauri/HumanControllableSubmarine.cs" id="1_g8j3o"]
 [ext_resource type="Texture2D" uid="uid://dxpos578r5ldd" path="res://Tomi/Sukellusvene.png" id="2_3v0rv"]
 [ext_resource type="Script" uid="uid://bvgbxiptbgvgy" path="res://Juuso/TorpedoLauncher.cs" id="3_3v0rv"]
 [ext_resource type="Texture2D" uid="uid://dvam1otplsm3x" path="res://Aku/FoamBoat.png" id="4_lfgb0"]
