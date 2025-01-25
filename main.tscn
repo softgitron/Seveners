@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://d03fqs570k6o4" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
 [ext_resource type="PackedScene" uid="uid://dn8jjea5g51u2" path="res://Lauri/MainSub.tscn" id="4_trn2v"]
 [ext_resource type="PackedScene" uid="uid://bv23qipckl4o3" path="res://Roni/Enemy.tscn" id="5_03owx"]
+[ext_resource type="Texture2D" uid="uid://blnrlp5di758c" path="res://Aku/splash.png" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://cfoyiiot5nsm0" path="res://Juuso/Player Stats.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://e6nr6geoy303" path="res://Roni/MainGameLogic.cs" id="7_272bh"]
 
@@ -25,11 +26,8 @@ texture_region_size = Vector2i(6, 6)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 3:0/0 = 0
-3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 4:0/0 = 0
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 7:0/0 = 0
@@ -37,11 +35,8 @@ texture_region_size = Vector2i(6, 6)
 0:1/0 = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, -3, 3, 3, -3, 3, -3, -3)
 2:1/0 = 0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(3, -3, 3, 3, -3, 3, -3, -3)
 3:1/0 = 0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 7:1/0 = 0
 7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 8:1/0 = 0
@@ -81,13 +76,12 @@ collision_mask = 21
 aboveWater = NodePath("../Above Water")
 belowWater = NodePath("../Under Water")
 
-[node name="Enemy" parent="." instance=ExtResource("5_03owx")]
-
 [node name="Goal" type="Area2D" parent="."]
 position = Vector2(14, 48)
 
 [node name="GoalSprite" type="Sprite2D" parent="Goal"]
 scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_272bh")
 
 [node name="GoalCollider" type="CollisionShape2D" parent="Goal"]
 shape = SubResource("CircleShape2D_272bh")
@@ -103,6 +97,22 @@ BelowWater = NodePath("../Under Water")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerStats" parent="CanvasLayer" node_paths=PackedStringArray("sub") instance=ExtResource("6_7mycd")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+grow_horizontal = 1
+grow_vertical = 0
 sub = NodePath("../../Player")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -128.0
+offset_right = 330.0
+offset_bottom = -105.0
+grow_vertical = 0
+text = "Level: 1"
 
 [connection signal="body_entered" from="Goal" to="MainGameLogic" method="_on_goal_body_entered"]
