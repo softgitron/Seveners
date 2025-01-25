@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://dn8jjea5g51u2"]
 
-[ext_resource type="Script" uid="uid://wkxkj2skf1cx" path="res://Lauri/ShipNode.cs" id="1_g8j3o"]
+[ext_resource type="Script" path="res://Lauri/HumanControllableSubmarine.cs" id="1_g8j3o"]
 [ext_resource type="Texture2D" uid="uid://dxpos578r5ldd" path="res://Tomi/Sukellusvene.png" id="2_3v0rv"]
 [ext_resource type="Script" uid="uid://bvgbxiptbgvgy" path="res://Juuso/TorpedoLauncher.cs" id="3_3v0rv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5mi43"]
 height = 118.0
 
-[node name="Submarine" type="CharacterBody2D"]
+[node name="HumanControllableSubmarine" type="CharacterBody2D"]
 script = ExtResource("1_g8j3o")
 
 [node name="SubSprite" type="Sprite2D" parent="."]

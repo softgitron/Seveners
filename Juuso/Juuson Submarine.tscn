@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://djdqim2ng5qoe"]
+[gd_scene load_steps=4 format=3 uid="uid://c2q1u7f7067vt"]
 
 [ext_resource type="Script" uid="uid://bkl50ux34lfov" path="res://Juuso/JuusonPlayer.cs" id="1_kfgkh"]
 [ext_resource type="Texture2D" uid="uid://dk1au0peyttiv" path="res://Tomi/Sukellusvene2.png" id="2_6uyj2"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://wk701kcwmn26"]
+[gd_scene load_steps=6 format=3 uid="uid://bb4kqa14q5url"]
 
 [ext_resource type="Shader" uid="uid://xho1325c5foi" path="res://Juuso/Noise testi Shader.gdshader" id="1_yp7dt"]
 [ext_resource type="Texture2D" uid="uid://ce4rxxgsq1i65" path="res://Juuso/Assets/Juuson Noise Texture.tres" id="2_dfb5l"]
