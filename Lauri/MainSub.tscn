@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn8jjea5g51u2"]
+[gd_scene load_steps=15 format=3 uid="uid://dn8jjea5g51u2"]
 
 [ext_resource type="Script" uid="uid://bs1yskhl7rvm0" path="res://Lauri/HumanControllableSubmarine.cs" id="1_g8j3o"]
 [ext_resource type="Texture2D" uid="uid://dxpos578r5ldd" path="res://Tomi/Sukellusvene.png" id="2_3v0rv"]
@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://d34qg766q6qp6" path="res://Aku/foamBoat/FoamBoat2.png" id="6_s35we"]
 [ext_resource type="Texture2D" uid="uid://cdrgjx0w4fnq1" path="res://Aku/foamBoat/FoamBoat3.png" id="7_kmhok"]
 [ext_resource type="Texture2D" uid="uid://dx6m2wdpwt7x2" path="res://Aku/foamBoat/FoamBoat4.png" id="8_ku6sd"]
+[ext_resource type="Texture2D" uid="uid://bndk5w5ygycy6" path="res://Aku/foamBoat/FoamBoat5.png" id="9_w5xae"]
+[ext_resource type="Texture2D" uid="uid://bacs27p3dndje" path="res://Aku/foamBoat/FoamBoat6.png" id="10_ngbls"]
+[ext_resource type="Texture2D" uid="uid://dw1ree3tbvw8i" path="res://Aku/foamBoat/FoamBoat7.png" id="11_wblw6"]
+[ext_resource type="Texture2D" uid="uid://c8h4vu3hhqou7" path="res://Aku/foamBoat/FoamBoat8.png" id="12_at0dn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5mi43"]
 height = 118.0
@@ -26,6 +30,18 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("8_ku6sd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_w5xae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ngbls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_wblw6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_at0dn")
 }],
 "loop": true,
 "name": &"default",
@@ -57,8 +73,11 @@ scale = Vector2(0.121, 0.121)
 texture = ExtResource("4_lfgb0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.709804)
 position = Vector2(0, 10.955)
 scale = Vector2(0.12, 0.12)
 sprite_frames = SubResource("SpriteFrames_w5xae")
 autoplay = "default"
-frame_progress = 0.220513
+frame = 4
+frame_progress = 0.590248
+speed_scale = 1.3

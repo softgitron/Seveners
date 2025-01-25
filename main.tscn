@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/MapTileMapTexture.png" id="1_fos0i"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="2_3dxm6"]
-[ext_resource type="Shader" uid="uid://d03fqs570k6o4" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
+[ext_resource type="Shader" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
 [ext_resource type="PackedScene" uid="uid://dn8jjea5g51u2" path="res://Lauri/MainSub.tscn" id="4_trn2v"]
 [ext_resource type="PackedScene" uid="uid://dn343gw0u6o7p" path="res://Roni/Enemy.tscn" id="5_03owx"]
 
