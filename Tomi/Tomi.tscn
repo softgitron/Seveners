@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfyut6ckwpkkx"]
+[gd_scene load_steps=6 format=3 uid="uid://0l4mcxvmo8x0"]
 
 [ext_resource type="PackedScene" uid="uid://sfu7ef1bosj4" path="res://Roni/MapGeneration/MapGeneration.tscn" id="1_vj25j"]
 [ext_resource type="Texture2D" uid="uid://dk1au0peyttiv" path="res://Tomi/Sukellusvene2.png" id="2_bbicw"]
@@ -13,12 +13,11 @@ size = Vector2(170, 820)
 
 [node name="MapGeneration" parent="." instance=ExtResource("1_vj25j")]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_navAgent", "_path")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_path")]
 position = Vector2(408, 504)
 motion_mode = 1
 script = ExtResource("3_p751h")
 _movementTarget = NodePath("../Marker2D")
-_navAgent = NodePath("NavigationAgent2D")
 _path = NodePath("Path2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
