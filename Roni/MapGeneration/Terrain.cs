@@ -5,12 +5,14 @@ public partial class Terrain : TileMapLayer
 	[Export]
 	Texture2D Noise;
 	const double SEABED_UPPER_BOUNDARY = 0.4;
-	const double ROCK_UPPER_BOUNDARY = 0.5;
-	const double SEA_UPPER_BOUNDARY = 0.7;
-	public readonly Vector2I SEABED = new(0, 0);
-	public readonly Vector2I ROCK = new(1, 0);
-	public readonly Vector2I SEA = new(2, 0);
-	public readonly Vector2I ISLAND = new(3, 0);
+	const double SEA_UPPER_BOUNDARY = 0.8;
+	const double ROCK_UPPER_BOUNDARY = 0.85;
+	const double BEACH_UPPER_BOUNDARY = 0.87;
+	public readonly Vector2I SEABED = new(8, 0);
+	public readonly Vector2I ROCK = new(5, 0);
+	public readonly Vector2I SEA = new(6, 0);
+	public readonly Vector2I BEACH = new(2, 0);
+	public readonly Vector2I ISLAND_CENTER = new(0, 0);
 
 	private bool _generated = false;
 
@@ -53,12 +55,14 @@ public partial class Terrain : TileMapLayer
 
 				if (noiseValue < SEABED_UPPER_BOUNDARY)
 					texture = SEABED;
-				else if (noiseValue < ROCK_UPPER_BOUNDARY)
-					texture = ROCK;
 				else if (noiseValue < SEA_UPPER_BOUNDARY)
 					texture = SEA;
+				else if (noiseValue < ROCK_UPPER_BOUNDARY)
+					texture = ROCK;
+				else if (noiseValue < BEACH_UPPER_BOUNDARY)
+					texture = BEACH;
 				else
-					texture = ISLAND;
+					texture = ISLAND_CENTER;
 				SetCell(new Vector2I(x, y), 0, texture);
 			}
 		}
