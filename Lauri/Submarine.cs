@@ -55,18 +55,18 @@ public partial class Submarine : CharacterBody2D
 	protected Vector2 up = new Vector2(0, -1);
 	private Vector2 zero = new Vector2(0, 0);
 
-    private float health = 100;
+	private float health = 100;
 	public override void _Ready()
 	{
 		_currentDirection = new Vector2(0, -1);
 		aboveMaterial = (ShaderMaterial)aboveWater.Material;
 	}
 
-    [Signal] public delegate void HealthCangedEventHandler(float newHealth);
-    public void TakeDamage(float damage){
-        health -= damage;
-        EmitSignal(SignalName.HealthCanged, health);
-    }
+	[Signal] public delegate void HealthCangedEventHandler(float newHealth);
+	public void TakeDamage(float damage){
+		health -= damage;
+		EmitSignal(SignalName.HealthCanged, health);
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -90,8 +90,8 @@ public partial class Submarine : CharacterBody2D
 		if (collision != null)
 		{
 			GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
-            TakeDamage(5);
-            Velocity = -Velocity * 0.5f;
+			TakeDamage(5);
+			Velocity = -Velocity * 0.5f;
 		}
 	}
 
@@ -102,7 +102,7 @@ public partial class Submarine : CharacterBody2D
 		isAboveWater = !isAboveWater;
 		aboveMaterial.SetShaderParameter("isUnderWater", !isAboveWater);
 		belowWater.CollisionEnabled = !isAboveWater; // This causes lag spike! TODO: Maybe better approach would be to change what colliders player reacts to (so no hiding colliders)
-        GetNode<AnimatedSprite2D>("AnimatedSprite2D").Visible = isAboveWater;
+		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Visible = isAboveWater;
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]

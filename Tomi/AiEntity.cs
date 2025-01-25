@@ -1,10 +1,12 @@
 using Godot;
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 
 public partial class AiEntity : CharacterBody2D
 {
+	
 	[Export]
 	public float _randomWaypointDistanceMultiplier = 1;
 	[Export]
@@ -94,6 +96,12 @@ public partial class AiEntity : CharacterBody2D
 		}
 		_movementTarget.GlobalPosition = newTargetForPatrol;
 	}
+	
+	public override void _Notification(int what)
+	{
+		if (what == NotificationExitTree)
+			Debug.Print(this.GetInstanceId().ToString() + " Exited!");
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{
@@ -118,6 +126,9 @@ public partial class AiEntity : CharacterBody2D
 
 		GlobalRotation = Mathf.LerpAngle(GlobalRotation, targetVector.Angle() + CorrectionAngle, _turnSpeed);
 		Velocity = newVelocity;
+
+		// Ei toimi jostain syystä saatana. Ei mee signaalit perille.
+		//SignalBus.Instance.EmitSignal(SignalBus.RadarLocationRegisteredName, GlobalPosition);
 		MoveAndSlide();
 	}
 }
