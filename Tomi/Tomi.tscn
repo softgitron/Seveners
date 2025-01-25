@@ -1,10 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfyut6ckwpkkx"]
+[gd_scene load_steps=6 format=3 uid="uid://cfyut6ckwpkkx"]
 
 [ext_resource type="Texture2D" uid="uid://dk1au0peyttiv" path="res://Tomi/Sukellusvene2.png" id="2_bbicw"]
 [ext_resource type="Script" uid="uid://dadk78pog2vxq" path="res://Tomi/AiEntity.cs" id="3_p751h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p751h"]
 size = Vector2(33, 172)
+
+[sub_resource type="Curve2D" id="Curve2D_bbicw"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_bbicw"]
 vertices = PackedVector2Array(584.109, 204.438, 23.6094, 593.453, 41.6875, 14.0938, 1115.5, 24.8906, 594.648, 209.578, 1088.49, 576.602, 614.461, 557.367)
@@ -13,25 +15,31 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(32, 4, 1126, 15, 1098, 
 
 [node name="Tomi" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_navAgent")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_navAgent", "_path")]
 position = Vector2(132, 146)
 motion_mode = 1
 script = ExtResource("3_p751h")
 _movementTarget = NodePath("../Marker2D")
 _navAgent = NodePath("NavigationAgent2D")
+_path = NodePath("Path2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_bbicw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+debug_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(-0.5, -4)
 shape = SubResource("RectangleShape2D_p751h")
 
+[node name="Path2D" type="Path2D" parent="CharacterBody2D"]
+curve = SubResource("Curve2D_bbicw")
+
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(898, 399)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(2, 5)
 navigation_polygon = SubResource("NavigationPolygon_bbicw")
