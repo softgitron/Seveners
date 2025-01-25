@@ -13,6 +13,14 @@ public partial class HumanControllableSubmarine : Submarine
 
 	private void _HandleInput(double delta)
 	{
+		// Switching above/below water
+		bool switchLayer = Input.IsActionJustPressed("surface");
+		if (switchLayer)
+		{
+			float depthToMoveTo = Convert.ToInt32(isAboveWater) * 500.0f;
+			base.MoveToDepth(depthToMoveTo);
+		}
+
 		int powerUp = Convert.ToInt32(Input.IsActionJustPressed("power_up"));
 		int powerDown = -Convert.ToInt32(Input.IsActionJustPressed("power_down"));
 		base.ChangePower(powerUp + powerDown);

@@ -29,7 +29,19 @@ public partial class Submarine : CharacterBody2D
 	public float SteerPower = 0.1f;
 	[Export]
 	public float SteerAngle = 0.005f;
+	// More depth -> down
+	[Export]
+	public float Depth = 0.0f;
+	[Export]
+	public float MaxDepth = 1000.0f;
+	[Export]
+	public float MinDepth = 0.0f;
 
+	[Export] TileMapLayer aboveWater;
+	[Export] TileMapLayer belowWater;
+	private ShaderMaterial aboveMaterial;
+
+	protected bool isAboveWater = true;
 	protected Vector2 _currentDirection;
 
 	protected Vector2 up = new Vector2(0, -1);
@@ -37,8 +49,9 @@ public partial class Submarine : CharacterBody2D
 	public override void _Ready()
 	{
 		_currentDirection = new Vector2(0, -1);
+		aboveMaterial = (ShaderMaterial)aboveWater.Material;
 	}
-	
+
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
@@ -47,7 +60,6 @@ public partial class Submarine : CharacterBody2D
 		CurrentSpeed = CurrentRpm;
 		Velocity = _currentDirection * CurrentSpeed;
 		Rotation = -_currentDirection.AngleTo(up);
-		Debug.Print("Current Velocity: " + Velocity.ToString());
 
 		// Using MoveAndCollide.
 		var collision = MoveAndCollide(Velocity * (float)delta);
@@ -55,6 +67,14 @@ public partial class Submarine : CharacterBody2D
 		{
 			GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
 		}
+	}
+
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public void MoveToDepth(float depth)
+	{
+		isAboveWater = !isAboveWater;
+		aboveMaterial.SetShaderParameter("isUnderWater", !isAboveWater);
+		belowWater.CollisionEnabled = !isAboveWater; // This causes lag spike! TODO: Maybe better approach would be to change what colliders player reacts to (so no hiding colliders)
 	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
