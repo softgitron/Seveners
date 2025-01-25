@@ -3,11 +3,13 @@ using Godot;
 public partial class Terrain : TileMapLayer
 {
 	[Export]
-	Texture2D Noise;
-	const double SEABED_UPPER_BOUNDARY = 0.4;
-	const double SEA_UPPER_BOUNDARY = 0.8;
-	const double ROCK_UPPER_BOUNDARY = 0.85;
-	const double BEACH_UPPER_BOUNDARY = 0.87;
+	public int Width = 512;
+	public int Height = 512;
+	private FastNoiseLite Noise;
+	const double SEABED_UPPER_BOUNDARY = -0.1;
+	const double SEA_UPPER_BOUNDARY = 0.3;
+	const double ROCK_UPPER_BOUNDARY = 0.35;
+	const double BEACH_UPPER_BOUNDARY = 0.37;
 	public readonly Vector2I SEABED = new(8, 0);
 	public readonly Vector2I ROCK = new(5, 0);
 	public readonly Vector2I SEA = new(6, 0);
@@ -16,26 +18,23 @@ public partial class Terrain : TileMapLayer
 
 	private bool _generated = false;
 
-	public override void _PhysicsProcess(double delta)
+	public override void _Ready()
 	{
-		base._PhysicsProcess(delta);
-
-		if (!_generated)
+		base._Ready();
+		Noise = new()
 		{
-			_generated = Generate();
-		}
+			Frequency = 0.01f,
+			FractalType = FastNoiseLite.FractalTypeEnum.Fbm,
+			FractalOctaves = 5,
+			FractalLacunarity = 1.6f,
+		};
+		Generate();
 	}
 
 	private bool Generate()
 	{
-		var textureImage = Noise.GetImage();
-		if (textureImage == null)
-		{
-			return false;
-		}
-
-		var halfHeight = Noise.GetHeight() / 2;
-		var halfWidth = Noise.GetWidth() / 2;
+		var halfHeight = Height / 2;
+		var halfWidth = Width / 2;
 
 		for (var y = -halfHeight; y < halfHeight; y++)
 		{
@@ -44,7 +43,7 @@ public partial class Terrain : TileMapLayer
 				Vector2I texture;
 				var temporaryVector = new Vector2I(x, y);
 
-				var noiseValue = textureImage.GetPixel(x + halfWidth, y + halfHeight).R;
+				var noiseValue = Noise.GetNoise2D(x, y);
 
 				// Skip if tile is already defined.
 				var currentAtlasCoords = GetCellAtlasCoords(temporaryVector);
