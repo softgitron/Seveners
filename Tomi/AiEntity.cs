@@ -11,7 +11,6 @@ public partial class AiEntity : CharacterBody2D
 	public NavigationAgent2D _navAgent;
 	[Export]
 	public Path2D _path;
-
     public override void _Ready()
     {
 		CallDeferred("SetMovementTarget");
@@ -21,8 +20,9 @@ public partial class AiEntity : CharacterBody2D
 	{
 		_navAgent.TargetPosition = _movementTarget.Position;
 
-        _path.Curve.AddPoint(ToLocal(this.GlobalPosition));
-        _path.Curve.AddPoint(ToLocal(_movementTarget.GlobalPosition));
+
+        //_path.Curve.AddPoint(ToLocal(this.GlobalPosition));
+        //_path.Curve.AddPoint(ToLocal(_movementTarget.GlobalPosition));
     }
     public override void _PhysicsProcess(double delta)
 	{
