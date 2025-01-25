@@ -1,32 +1,48 @@
 using Godot;
-using NoiseTest;
 
 public partial class Terrain : TileMapLayer
 {
 	[Export]
-	int MAP_SIZE_X = 512;
-	[Export]
-	int MAP_SIZE_Y = 512;
-	const double GLANURARITY = 0.03;
-	const double SEABED_UPPER_BOUNDARY = -0.4;
-	const double ROCK_UPPER_BOUNDARY = -0.1;
+	Texture2D Noise;
+	const double SEABED_UPPER_BOUNDARY = 0.4;
+	const double ROCK_UPPER_BOUNDARY = 0.5;
 	const double SEA_UPPER_BOUNDARY = 0.7;
-	public readonly Vector2I SEABED = new Vector2I(0, 0);
-	public readonly Vector2I ROCK = new Vector2I(1, 0);
-	public readonly Vector2I SEA = new Vector2I(2, 0);
-	public readonly Vector2I ISLAND = new Vector2I(3, 0);
+	public readonly Vector2I SEABED = new(0, 0);
+	public readonly Vector2I ROCK = new(1, 0);
+	public readonly Vector2I SEA = new(2, 0);
+	public readonly Vector2I ISLAND = new(3, 0);
 
-	public override void _Ready()
+	private bool _generated = false;
+
+	public override void _PhysicsProcess(double delta)
 	{
-		var noise = new OpenSimplexNoise();
-		for (var y = -MAP_SIZE_Y / 2; y < MAP_SIZE_Y / 2; y++)
+		base._PhysicsProcess(delta);
+
+		if (!_generated)
 		{
-			for (var x = -MAP_SIZE_X / 2; x < MAP_SIZE_X / 2; x++)
+			_generated = Generate();
+		}
+	}
+
+	private bool Generate()
+	{
+		var textureImage = Noise.GetImage();
+		if (textureImage == null)
+		{
+			return false;
+		}
+
+		var halfHeight = Noise.GetHeight() / 2;
+		var halfWidth = Noise.GetWidth() / 2;
+
+		for (var y = -halfHeight; y < halfHeight; y++)
+		{
+			for (var x = -halfWidth; x < halfWidth; x++)
 			{
 				Vector2I texture;
 				var temporaryVector = new Vector2I(x, y);
 
-				var noiseValue = noise.Evaluate(x * GLANURARITY, y * GLANURARITY);
+				var noiseValue = textureImage.GetPixel(x + halfWidth, y + halfHeight).R;
 
 				// Skip if tile is already defined.
 				var currentAtlasCoords = GetCellAtlasCoords(temporaryVector);
@@ -46,5 +62,7 @@ public partial class Terrain : TileMapLayer
 				SetCell(new Vector2I(x, y), 0, texture);
 			}
 		}
+
+		return true;
 	}
 }
