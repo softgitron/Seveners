@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bdv8gor6ir4o6" path="res://Roni/MapGeneration/Graphic/TestTileset.png" id="1_jsn6o"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="1_o8uow"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_liryv"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jsn6o"]
 texture = ExtResource("1_jsn6o")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
@@ -1036,7 +1036,7 @@ texture_region_size = Vector2i(128, 128)
 [sub_resource type="TileSet" id="TileSet_jj57x"]
 tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_liryv")
+sources/0 = SubResource("TileSetAtlasSource_jsn6o")
 
 [node name="MapGeneration" type="Node2D"]
 
