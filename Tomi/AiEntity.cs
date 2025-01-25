@@ -12,8 +12,8 @@ public partial class AiEntity : CharacterBody2D
 
     public override void _Ready()
     {
-		CallDeferred("SetMovementTarget");
 
+		CallDeferred("SetMovementTarget");
     }
 
 	public void SetMovementTarget()
@@ -30,7 +30,7 @@ public partial class AiEntity : CharacterBody2D
 		Vector2 nextPathPosition = _navAgent.GetNextPathPosition();
 		Vector2 newVelocity = nextPathPosition - currentEntityPosition;
 		newVelocity = newVelocity.Normalized();
-		newVelocity *= (_movementSpeed * (float)delta);
+		newVelocity *= _movementSpeed * (float)delta;
 		
 
 		Velocity = newVelocity;

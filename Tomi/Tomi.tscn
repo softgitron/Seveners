@@ -1,38 +1,37 @@
 [gd_scene load_steps=5 format=3 uid="uid://cfyut6ckwpkkx"]
 
-[ext_resource type="PackedScene" uid="uid://sfu7ef1bosj4" path="res://Roni/MapGeneration/MapGeneration.tscn" id="1_vj25j"]
-[ext_resource type="Texture2D" uid="uid://c2g2kwke1q0ud" path="res://icon.svg" id="2_bbicw"]
+[ext_resource type="Texture2D" uid="uid://dk1au0peyttiv" path="res://Tomi/Sukellusvene2.png" id="2_bbicw"]
 [ext_resource type="Script" uid="uid://dadk78pog2vxq" path="res://Tomi/AiEntity.cs" id="3_p751h"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xjhi"]
-size = Vector2(38, 38)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p751h"]
+size = Vector2(33, 172)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_bbicw"]
+vertices = PackedVector2Array(584.109, 204.438, 23.6094, 593.453, 41.6875, 14.0938, 1115.5, 24.8906, 594.648, 209.578, 1088.49, 576.602, 614.461, 557.367)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3), PackedInt32Array(4, 0, 3), PackedInt32Array(4, 3, 5, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(32, 4, 1126, 15, 1098, 587, 605, 567, 585, 216, 13, 613)])
 
 [node name="Tomi" type="Node2D"]
 
-[node name="MapGeneration" parent="." instance=ExtResource("1_vj25j")]
-
-[node name="aiEntity" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_navAgent")]
-position = Vector2(241, 92)
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_navAgent")]
+position = Vector2(132, 146)
+motion_mode = 1
 script = ExtResource("3_p751h")
 _movementTarget = NodePath("../Marker2D")
 _navAgent = NodePath("NavigationAgent2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="aiEntity"]
-position = Vector2(7.62939e-06, 7.62939e-06)
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_0xjhi")
-
-[node name="Sprite2D" type="Sprite2D" parent="aiEntity"]
-position = Vector2(7.62939e-06, 7.62939e-06)
-scale = Vector2(0.3125, 0.3125)
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_bbicw")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="aiEntity"]
-debug_enabled = true
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.5, -4)
+shape = SubResource("RectangleShape2D_p751h")
 
 [node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(898, 399)
 
-[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
-position = Vector2(1004, 529)
-scale = Vector2(0.289062, 0.289062)
-texture = ExtResource("2_bbicw")
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_bbicw")
