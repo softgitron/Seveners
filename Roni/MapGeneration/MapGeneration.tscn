@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://sfu7ef1bosj4"]
+[gd_scene load_steps=6 format=3 uid="uid://sfu7ef1bosj4"]
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/pixel tile sheet.png" id="1_jsn6o"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="1_o8uow"]
+[ext_resource type="PackedScene" uid="uid://dn8jjea5g51u2" path="res://Lauri/MainSub.tscn" id="3_liryv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_liryv"]
 texture = ExtResource("1_jsn6o")
@@ -41,3 +42,5 @@ script = ExtResource("1_o8uow")
 [node name="Map" type="TileMapLayer" parent="Map"]
 tile_set = SubResource("TileSet_jj57x")
 script = ExtResource("1_o8uow")
+
+[node name="Submarine" parent="." instance=ExtResource("3_liryv")]
