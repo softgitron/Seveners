@@ -9,34 +9,40 @@ public partial class ShipNode : CharacterBody2D
 	[Export]
 	public double Weight = 100;
 	[Export]
-	public float Speed = 100.0f;
+	public float CurrentSpeed = 0.0f;
 	[Export]
-	public float CurrentPower = 0.0f;
+	public float CurrentRpm = 0.0f;
 	[Export]
-	public float TargetPower = 100.0f;
+	public float CurrentTargetRpm = 0.0f;
 	[Export]
-	public float PowerShiftInterval = 20.0f;
+	public float ThrottleShiftInterval = 1.0f;
 	[Export]
-	public float MaxPower = 100.0f;
+	public float RpmLimiterShiftInterval = 10.0f;
 	[Export]
-	public float MinPower = 100.0f;
+	public float MaxRpm = 100.0f;
+	[Export]
+	public float CurrentMaxRpm = 10.0f;
+	[Export]
+	public float MinRpm = -10.0f;
 	[Export]
 	public float SteerPower = 0.1f;
 	[Export]
-	public float SteerAngle = 360/(2*float.Pi);
+	public float SteerAngle = 0.005f;
 
-	private Vector2 _currentDirection; 
+	private Vector2 _currentDirection;
+
+	private Vector2 up = new Vector2(0, -1);
 	
 	public override void _Ready()
 	{
-		_currentDirection = new Vector2(1, 0);
+		_currentDirection = new Vector2(0, -1);
 	}
 	
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
 		
-		_HandleInput();
+		_HandleInput(delta);
 
 		// Using MoveAndCollide.
 		var collision = MoveAndCollide(Velocity * (float)delta);
@@ -46,32 +52,8 @@ public partial class ShipNode : CharacterBody2D
 		}
 	}
 
-	private void _HandleInput()
+	private void _HandleInput(double delta)
 	{
-		Debug.Print("Handling input");
-		if (Input.IsActionPressed("throttle"))
-		{
-			Debug.Print("Throttle pressed");
-			Speed = 10.0f;
-		}
-		
-		if (Input.IsActionPressed("steer_left"))
-		{
-			Debug.Print("steer left pressed");
-			_currentDirection = _currentDirection.Rotated(SteerAngle);
-		}
-		
-		if (Input.IsActionPressed("steer_right"))
-		{
-			Debug.Print("steer right pressed");
-			_currentDirection = _currentDirection.Rotated(-SteerAngle);
-		}
-
-		if (Input.IsActionPressed("reverse"))
-		{
-			Debug.Print("reverse pressed");
-			Speed = -10.0f;
-		}
 
 		bool powerUp = Input.IsActionJustPressed("power_up");
 		bool powerDown = Input.IsActionJustPressed("power_down");
@@ -79,17 +61,44 @@ public partial class ShipNode : CharacterBody2D
 		if (powerUp && powerDown)
 		{
 			// Nothing
-		} else if (powerUp)
+		}
+		else if (powerUp)
 		{
-			CurrentPower += PowerShiftInterval;
-			CurrentPower = Math.Min(CurrentPower, MaxPower);
-		} else if (powerDown)
+			CurrentMaxRpm = Math.Min(CurrentMaxRpm + RpmLimiterShiftInterval, MaxRpm);
+		}
+		else if (powerDown)
 		{
-			CurrentPower -= PowerShiftInterval;
-			CurrentPower = Math.Max(CurrentPower, MinPower);
+			CurrentMaxRpm -= RpmLimiterShiftInterval;
+			CurrentMaxRpm = Math.Max(CurrentMaxRpm - RpmLimiterShiftInterval, MinRpm);
 		}
 
-		Velocity = _currentDirection * CurrentPower;
+		if (Input.IsActionPressed("throttle_up"))
+		{
+			CurrentRpm = Math.Min(CurrentRpm + ThrottleShiftInterval, CurrentMaxRpm);
+			Debug.Print(CurrentRpm.ToString());
+		}
+
+		if (Input.IsActionPressed("throttle_down"))
+		{
+			CurrentRpm = Math.Max(CurrentRpm - ThrottleShiftInterval, MinRpm);
+			Debug.Print(CurrentRpm.ToString());
+		}
+
+		if (Input.IsActionPressed("steer_left"))
+		{
+			_currentDirection = _currentDirection.Rotated(-SteerAngle);
+		}
+		
+		if (Input.IsActionPressed("steer_right"))
+		{
+			_currentDirection = _currentDirection.Rotated(SteerAngle);
+		}
+
+		CurrentSpeed = CurrentRpm;
+		Debug.Print(CurrentSpeed.ToString());
+
+		Velocity = _currentDirection * CurrentSpeed;
+		Rotation = -_currentDirection.AngleTo(up);
 	}
 
 	private void _on_timer_timeout()
