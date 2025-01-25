@@ -57,7 +57,7 @@ public partial class ShipNode : CharacterBody2D
 
 	private void _HandleInput(double delta)
 	{
-        // Switching above/below water
+		// Switching above/below water
 		bool switchLayer = Input.IsActionJustPressed("surface");
 		if (switchLayer){
 			isAboveWater = !isAboveWater;
