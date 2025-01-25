@@ -5,6 +5,7 @@ public partial class Terrain : TileMapLayer
 	[Export] public int Width = 512;
 	[Export] public int Height = 512;
 	[Export] public bool UnderTheWater = false;
+	[Export] public int SafetyLimit = 10;
 
 	// Values go from -0.5 to 0.5
 	const double NOISE_VALUE_NORMAL_W = -0.4;
@@ -54,6 +55,20 @@ public partial class Terrain : TileMapLayer
 		NavigationAgent.Update();
 
 		Generate();
+	}
+
+	public bool validateMapBounds(Vector2 vector)
+	{
+		if (vector.X < SafetyLimit || vector.X > (Width * 6 - SafetyLimit))
+		{
+			return false;
+		}
+		if (vector.Y < SafetyLimit || vector.Y > (Height * 6 - SafetyLimit))
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	private bool Generate()

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://b66k3tl1gyn08"]
+
+[ext_resource type="Script" uid="uid://dadk78pog2vxq" path="res://Tomi/AiEntity.cs" id="1_6qbxj"]
+[ext_resource type="Texture2D" uid="uid://dk1au0peyttiv" path="res://Tomi/Sukellusvene2.png" id="2_o4vbm"]
+[ext_resource type="Texture2D" uid="uid://c2g2kwke1q0ud" path="res://icon.svg" id="3_o4vbm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixrpy"]
+size = Vector2(170, 820)
+
+[sub_resource type="Curve2D" id="Curve2D_3tp2t"]
+
+[node name="EnemyBase" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_path")]
+position = Vector2(408, 504)
+motion_mode = 1
+script = ExtResource("1_6qbxj")
+_randomWaypointDistanceMultiplier = 5.0
+_movementSpeed = 5000.0
+_movementTarget = NodePath("../Marker2D")
+_path = NodePath("Path2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_o4vbm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.5, -2)
+scale = Vector2(0.1, 0.1)
+shape = SubResource("RectangleShape2D_ixrpy")
+
+[node name="Path2D" type="Path2D" parent="CharacterBody2D"]
+curve = SubResource("Curve2D_3tp2t")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(1780, 1029)
+
+[node name="Sprite2D" type="Sprite2D" parent="Marker2D"]
+position = Vector2(1, 1)
+scale = Vector2(0.21875, 0.234375)
+texture = ExtResource("3_o4vbm")
