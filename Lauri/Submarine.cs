@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 public partial class Submarine : CharacterBody2D
 {
-	
+
 	[Export]
 	public double Weight = 100;
 	[Export]
@@ -45,7 +45,7 @@ public partial class Submarine : CharacterBody2D
 	protected Vector2 _currentDirection;
 
 	protected Vector2 up = new Vector2(0, -1);
-	
+
 	public override void _Ready()
 	{
 		_currentDirection = new Vector2(0, -1);
