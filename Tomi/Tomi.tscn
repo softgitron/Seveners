@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfyut6ckwpkkx"]
+
+[ext_resource type="PackedScene" uid="uid://sfu7ef1bosj4" path="res://Roni/MapGeneration/MapGeneration.tscn" id="1_vj25j"]
+[ext_resource type="Texture2D" uid="uid://dk1au0peyttiv" path="res://Tomi/Sukellusvene2.png" id="2_bbicw"]
+[ext_resource type="Script" uid="uid://dadk78pog2vxq" path="res://Tomi/AiEntity.cs" id="3_p751h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p751h"]
+size = Vector2(170, 820)
+
+[sub_resource type="Curve2D" id="Curve2D_bbicw"]
+
+[node name="Tomi" type="Node2D"]
+
+[node name="MapGeneration" parent="." instance=ExtResource("1_vj25j")]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_navAgent", "_path")]
+position = Vector2(408, 504)
+motion_mode = 1
+script = ExtResource("3_p751h")
+_movementTarget = NodePath("../Marker2D")
+_navAgent = NodePath("NavigationAgent2D")
+_path = NodePath("Path2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_bbicw")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+debug_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.5, -2)
+scale = Vector2(0.1, 0.1)
+shape = SubResource("RectangleShape2D_p751h")
+
+[node name="Path2D" type="Path2D" parent="CharacterBody2D"]
+curve = SubResource("Curve2D_bbicw")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(933, 109)
