@@ -1,14 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://wk701kcwmn26"]
+[gd_scene load_steps=6 format=3 uid="uid://wk701kcwmn26"]
 
 [ext_resource type="Script" uid="uid://bc7snya6xaxs8" path="res://Juuso/JuusonNoise.cs" id="1_726yc"]
 [ext_resource type="Shader" uid="uid://xho1325c5foi" path="res://Juuso/Noise testi Shader.gdshader" id="1_g4vns"]
 [ext_resource type="Texture2D" uid="uid://ce4rxxgsq1i65" path="res://Juuso/Assets/Juuson Noise Texture.tres" id="3_g4vns"]
-[ext_resource type="Script" uid="uid://bkl50ux34lfov" path="res://Juuso/JuusonPlayer.cs" id="4_8d3jo"]
-[ext_resource type="Texture2D" uid="uid://dk1au0peyttiv" path="res://Tomi/Sukellusvene2.png" id="4_dtmlg"]
+[ext_resource type="PackedScene" uid="uid://djdqim2ng5qoe" path="res://Juuso/Sukellusvene.tscn" id="4_dtmlg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtmlg"]
 shader = ExtResource("1_g4vns")
-shader_parameter/isUnderWater = false
+shader_parameter/isUnderWater = true
 shader_parameter/waterColor = Color(0.0967328, 0.334114, 1, 1)
 shader_parameter/landColor = Color(1.44392e-07, 0.529095, 2.5028e-06, 1)
 shader_parameter/sandColor = Color(0.697857, 0.538853, 0.264455, 1)
@@ -17,10 +16,6 @@ shader_parameter/bottomColor = Color(0.10567, 0.143481, 0.264275, 1)
 shader_parameter/oceanColor = Color(0.106664, 0.171807, 0.423029, 1)
 shader_parameter/wallsColor = Color(0, 0, 0, 1)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dtmlg"]
-radius = 1.3
-height = 10.0
-
 [node name="NoiseTesti" type="Node2D"]
 
 [node name="NoiseDisplay" type="Sprite2D" parent="."]
@@ -28,15 +23,4 @@ material = SubResource("ShaderMaterial_dtmlg")
 texture = ExtResource("3_g4vns")
 script = ExtResource("1_726yc")
 
-[node name="Sub" type="CharacterBody2D" parent="."]
-script = ExtResource("4_8d3jo")
-
-[node name="Sprite2D" type="Sprite2D" parent="Sub"]
-scale = Vector2(0.01, 0.01)
-texture = ExtResource("4_dtmlg")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sub"]
-shape = SubResource("CapsuleShape2D_dtmlg")
-
-[node name="Camera2D" type="Camera2D" parent="Sub"]
-zoom = Vector2(15, 15)
+[node name="Sub" parent="." instance=ExtResource("4_dtmlg")]
