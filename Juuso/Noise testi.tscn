@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://wk701kcwmn26"]
+
+[ext_resource type="Script" uid="uid://bc7snya6xaxs8" path="res://Juuso/JuusonNoise.cs" id="1_726yc"]
+[ext_resource type="Texture2D" uid="uid://ce4rxxgsq1i65" path="res://Juuso/Assets/Juuson Noise Texture.tres" id="3_g4vns"]
+
+[node name="NoiseTesti" type="Node2D"]
+
+[node name="Noise" type="Node2D" parent="."]
+
+[node name="NoiseDisplay" type="Sprite2D" parent="."]
+texture = ExtResource("3_g4vns")
+script = ExtResource("1_726yc")
+
+[node name="Camera2D" type="Camera2D" parent="."]
