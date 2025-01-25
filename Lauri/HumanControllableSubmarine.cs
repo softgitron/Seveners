@@ -21,12 +21,13 @@ public partial class HumanControllableSubmarine : Submarine
 			base.MoveToDepth(depthToMoveTo);
 		}
 
-		int powerUp = Convert.ToInt32(Input.IsActionJustPressed("power_up"));
-		int powerDown = -Convert.ToInt32(Input.IsActionJustPressed("power_down"));
-		base.ChangePower(powerUp + powerDown);
+		int powerUp = Convert.ToInt32(Input.IsActionJustPressed("gear_up"));
+		int powerDown = -Convert.ToInt32(Input.IsActionJustPressed("gear_down"));
+		base.ChangeGear(powerUp + powerDown);
 
 		int throttleUp = Convert.ToInt32(Input.IsActionPressed("throttle_up"));
 		int throttleDown = -Convert.ToInt32(Input.IsActionPressed("throttle_down"));
+		
 		base.ChangeThrottle(throttleUp + throttleDown);
 
 		float steerDegrees = (Convert.ToInt32(Input.IsActionPressed("steer_right")) * -SteerAngle) + (Convert.ToInt32(Input.IsActionPressed("steer_left")) * SteerAngle);
