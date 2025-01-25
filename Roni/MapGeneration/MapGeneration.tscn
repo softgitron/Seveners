@@ -1038,6 +1038,11 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_jsn6o")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jsn6o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_liryv"]
+noise = SubResource("FastNoiseLite_jsn6o")
+
 [node name="MapGeneration" type="Node2D"]
 
 [node name="Map" type="TileMapLayer" parent="."]
