@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bco444s1q7afo"
-path="res://.godot/imported/RadarBlip.png-ed80a5ebe91166fdd8079fa1b28f25a5.ctex"
+uid="uid://bndk5w5ygycy6"
+path="res://.godot/imported/FoamBoat5.png-18af094ed86776560d3fca8e6f135f22.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lauri/RadarBlip.png"
-dest_files=["res://.godot/imported/RadarBlip.png-ed80a5ebe91166fdd8079fa1b28f25a5.ctex"]
+source_file="res://Aku/foamBoat/FoamBoat5.png"
+dest_files=["res://.godot/imported/FoamBoat5.png-18af094ed86776560d3fca8e6f135f22.ctex"]
 
 [params]
 

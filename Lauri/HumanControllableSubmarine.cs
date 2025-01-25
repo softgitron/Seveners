@@ -4,7 +4,6 @@ using System.Diagnostics;
 
 public partial class HumanControllableSubmarine : Submarine
 {
-
 	public override void _PhysicsProcess(double delta)
 	{
 		_HandleInput(delta);
@@ -27,11 +26,11 @@ public partial class HumanControllableSubmarine : Submarine
 
 		int throttleUp = Convert.ToInt32(Input.IsActionPressed("throttle_up"));
 		int throttleDown = -Convert.ToInt32(Input.IsActionPressed("throttle_down"));
-		
+
 		base.ChangeThrottle(throttleUp + throttleDown);
 
-		float steerDegrees = (Convert.ToInt32(Input.IsActionPressed("steer_right")) * -SteerAngle) + (Convert.ToInt32(Input.IsActionPressed("steer_left")) * SteerAngle);
-		base.Steer(steerDegrees);
+		int steerDirection = (-Convert.ToInt32(Input.IsActionPressed("steer_right"))) + Convert.ToInt32(Input.IsActionPressed("steer_left"));
+		base.Steer(steerDirection);
 	}
 
 	private void _on_timer_timeout()

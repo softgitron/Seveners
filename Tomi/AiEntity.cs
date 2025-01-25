@@ -49,12 +49,12 @@ public partial class AiEntity : CharacterBody2D
 	private Vector2 GetRandomWaypointForDistance(float distanceToWaypoint)
 	{
 		var random = new Random();
-        var randomCirclePoint = random.Next(0, 360);
+		var randomCirclePoint = random.Next(0, 360);
 
-        var randomXValue = distanceToWaypoint * Math.Cos(randomCirclePoint);
-        var randomYValue = distanceToWaypoint * Math.Sin(randomCirclePoint);
+		var randomXValue = distanceToWaypoint * Math.Cos(randomCirclePoint);
+		var randomYValue = distanceToWaypoint * Math.Sin(randomCirclePoint);
 
-        return new Vector2((float)randomXValue, (float)randomYValue);
+		return new Vector2((float)randomXValue, (float)randomYValue);
 	}
 
 	private Vector2I WorldCoordinateToTerrainCoordinate(Vector2 globalCoordinate)
@@ -89,20 +89,15 @@ public partial class AiEntity : CharacterBody2D
 				continue;
 			};
 
-            var mapNavigationPoints = terrain.NavigationAgent.GetPointPath(WorldCoordinateToTerrainCoordinate(GlobalPosition), WorldCoordinateToTerrainCoordinate(newTargetForPatrol), false);
+			var mapNavigationPoints = terrain.NavigationAgent.GetPointPath(WorldCoordinateToTerrainCoordinate(GlobalPosition), WorldCoordinateToTerrainCoordinate(newTargetForPatrol), false);
 
 			if (mapNavigationPoints.Length != 0)
 			{
 				isTargetValid = true;
 			}
         }
-
-		if (_movementTarget == null)
-		{
-
-		}
 		_movementTarget.GlobalPosition = newTargetForPatrol;
-    }
+	}
 
 	public override void _PhysicsProcess(double delta)
 	{

@@ -67,7 +67,6 @@ SafetyLimit = 60
 material = SubResource("ShaderMaterial_jj57x")
 tile_set = SubResource("TileSet_jj57x")
 script = ExtResource("1_o8uow")
-SafetyLimit = 60
 
 [node name="HumanControllableSubmarine" parent="." node_paths=PackedStringArray("aboveWater", "belowWater") instance=ExtResource("3_liryv")]
 position = Vector2(747, 721)

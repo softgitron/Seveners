@@ -2,8 +2,8 @@ using Godot;
 
 public partial class Terrain : TileMapLayer
 {
-	[Export] public int Width = 512;
-	[Export] public int Height = 512;
+	public const int Width = 1024;
+	public const int Height = 1024;
 	[Export] public bool UnderTheWater = false;
 	[Export] public int SafetyLimit = 10;
 
@@ -34,16 +34,15 @@ public partial class Terrain : TileMapLayer
 
 	private FastNoiseLite Noise;
 
-	public override void _Ready()
+	public void Initialize(int seed)
 	{
-		base._Ready();
-		GD.Print("GENERATE");
 		Noise = new()
 		{
 			Frequency = 0.01f,
 			FractalType = FastNoiseLite.FractalTypeEnum.Fbm,
 			FractalOctaves = 5,
 			FractalLacunarity = 1.6f,
+			Seed = seed
 		};
 		NavigationAgent = new()
 		{
