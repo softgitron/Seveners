@@ -46,4 +46,4 @@ script = ExtResource("1_o8uow")
 tile_set = SubResource("TileSet_jj57x")
 script = ExtResource("1_o8uow")
 
-[node name="Submarine" parent="." instance=ExtResource("3_liryv")]
+[node name="HumanControllableSubmarine" parent="." instance=ExtResource("3_liryv")]
