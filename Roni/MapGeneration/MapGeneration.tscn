@@ -11,7 +11,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)])
 agent_radius = 0.0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jsn6o"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jj57x"]
 texture = ExtResource("1_jsn6o")
 texture_region_size = Vector2i(6, 6)
 8:0/0 = 0
@@ -48,7 +48,7 @@ texture_region_size = Vector2i(6, 6)
 tile_size = Vector2i(6, 6)
 physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
-sources/0 = SubResource("TileSetAtlasSource_jsn6o")
+sources/0 = SubResource("TileSetAtlasSource_jj57x")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jj57x"]
 shader = ExtResource("3_jj57x")
