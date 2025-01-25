@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bc7snya6xaxs8" path="res://Juuso/JuusonNoise.cs" id="1_726yc"]
 [ext_resource type="Shader" uid="uid://xho1325c5foi" path="res://Juuso/Noise testi Shader.gdshader" id="1_g4vns"]
 [ext_resource type="Texture2D" uid="uid://ce4rxxgsq1i65" path="res://Juuso/Assets/Juuson Noise Texture.tres" id="3_g4vns"]
-[ext_resource type="PackedScene" uid="uid://djdqim2ng5qoe" path="res://Juuso/Sukellusvene.tscn" id="4_dtmlg"]
+[ext_resource type="PackedScene" path="res://Juuso/Sukellusvene.tscn" id="4_dtmlg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtmlg"]
 shader = ExtResource("1_g4vns")

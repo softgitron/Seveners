@@ -1,43 +1,78 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class AiEntity : CharacterBody2D
 {
 	[Export]
 	public float _movementSpeed = 1000f;
 	[Export]
+	public float _turnSpeed = 0.01f;
+	[Export]
 	public Marker2D _movementTarget;
 	[Export]
-	public NavigationAgent2D _navAgent;
-	[Export]
 	public Path2D _path;
-    public override void _Ready()
-    {
+
+	private const float CorrectionAngle = (float)Math.PI / 2;
+
+	private Terrain terrain;
+	private List<Vector2> navigationPoints = [];
+	private Vector2 currentNavigationTarget;
+
+	public override void _Ready()
+	{
 		CallDeferred("SetMovementTarget");
-    }
+		terrain = GetNode<Terrain>("../MapGeneration/Above Water");
+	}
 
 	public void SetMovementTarget()
 	{
-		_navAgent.TargetPosition = _movementTarget.Position;
+		var targetTerrainCoordinate = WorldCoordinateToTerrainCoordinate(_movementTarget.GlobalPosition);
+		var currentTerrainCoordinate = WorldCoordinateToTerrainCoordinate(GlobalPosition);
 
+		var mapNavigationPoints = terrain.NavigationAgent.GetPointPath(currentTerrainCoordinate, targetTerrainCoordinate, true);
+		navigationPoints = [.. mapNavigationPoints.Select(TerrainCoordinateToWorldCoordinate)];
+		currentNavigationTarget = navigationPoints[0];
+		navigationPoints.RemoveAt(0);
+	}
 
-        //_path.Curve.AddPoint(ToLocal(this.GlobalPosition));
-        //_path.Curve.AddPoint(ToLocal(_movementTarget.GlobalPosition));
-    }
-    public override void _PhysicsProcess(double delta)
+	private Vector2I WorldCoordinateToTerrainCoordinate(Vector2 globalCoordinate)
 	{
-		if (_navAgent.IsNavigationFinished())
+		var localPosition = terrain.ToLocal(globalCoordinate);
+		var terrainCoordinate = terrain.LocalToMap(localPosition);
+		return terrainCoordinate;
+	}
+
+	private Vector2 TerrainCoordinateToWorldCoordinate(Vector2 terrainCoordinate)
+	{
+		var terrainInterface = (Vector2I)terrainCoordinate;
+		var localPosition = terrain.MapToLocal(terrainInterface);
+		var globaPosition = terrain.ToGlobal(localPosition);
+		return globaPosition;
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		if (navigationPoints.Count == 0)
 		{
 			return;
 		}
-		Vector2 currentEntityPosition = this.GlobalPosition;
-		Vector2 nextPathPosition = _navAgent.GetNextPathPosition();
-		Vector2 newVelocity = nextPathPosition - currentEntityPosition;
+
+		if (currentNavigationTarget.DistanceTo(GlobalPosition) < 5.0)
+		{
+			currentNavigationTarget = navigationPoints.First();
+			navigationPoints.RemoveAt(0);
+		}
+
+		Vector2 newVelocity = currentNavigationTarget - GlobalPosition;
 		newVelocity = newVelocity.Normalized();
 		newVelocity *= _movementSpeed * (float)delta;
 
+		var targetVector = currentNavigationTarget - GlobalPosition;
 
-        Velocity = newVelocity;
+		GlobalRotation = Mathf.LerpAngle(GlobalRotation, targetVector.Angle() + CorrectionAngle, _turnSpeed);
+		Velocity = newVelocity;
 		MoveAndSlide();
 	}
 }
