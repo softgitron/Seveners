@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn343gw0u6o7p"]
+[gd_scene load_steps=5 format=3 uid="uid://bv23qipckl4o3"]
 
 [ext_resource type="Script" uid="uid://dadk78pog2vxq" path="res://Tomi/AiEntity.cs" id="1_0nn7a"]
 [ext_resource type="Texture2D" uid="uid://dk1au0peyttiv" path="res://Tomi/Sukellusvene2.png" id="2_85mac"]
@@ -12,6 +12,8 @@ size = Vector2(170, 820)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_path")]
 position = Vector2(408, 504)
+collision_layer = 4
+collision_mask = 27
 motion_mode = 1
 script = ExtResource("1_0nn7a")
 _randomWaypointDistanceMultiplier = 6.0

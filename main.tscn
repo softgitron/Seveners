@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://3fnbgnnspg2n"]
+[gd_scene load_steps=13 format=3 uid="uid://6smyb87bxo7n"]
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/MapTileMapTexture.png" id="1_fos0i"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="2_3dxm6"]
 [ext_resource type="Shader" uid="uid://d03fqs570k6o4" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
 [ext_resource type="PackedScene" uid="uid://dn8jjea5g51u2" path="res://Lauri/MainSub.tscn" id="4_trn2v"]
-[ext_resource type="PackedScene" uid="uid://dn343gw0u6o7p" path="res://Roni/Enemy.tscn" id="5_03owx"]
+[ext_resource type="PackedScene" uid="uid://bv23qipckl4o3" path="res://Roni/Enemy.tscn" id="5_03owx"]
 [ext_resource type="PackedScene" uid="uid://cfoyiiot5nsm0" path="res://Juuso/Player Stats.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://e6nr6geoy303" path="res://Roni/MainGameLogic.cs" id="7_272bh"]
 
@@ -50,6 +50,7 @@ texture_region_size = Vector2i(6, 6)
 [sub_resource type="TileSet" id="TileSet_kek77"]
 tile_size = Vector2i(6, 6)
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 23
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_5vw27")
 
@@ -75,6 +76,8 @@ script = ExtResource("2_3dxm6")
 
 [node name="Player" parent="." node_paths=PackedStringArray("aboveWater", "belowWater") instance=ExtResource("4_trn2v")]
 position = Vector2(587, 329)
+collision_layer = 2
+collision_mask = 21
 aboveWater = NodePath("../Above Water")
 belowWater = NodePath("../Under Water")
 
