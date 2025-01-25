@@ -9,6 +9,6 @@ public partial class JuusonNoise : Sprite2D
 	}
 	public override void _Process(double delta){
 		FastNoiseLite fnl = noise.Noise as FastNoiseLite;
-		//fnl.Offset = new Vector3(fnl.Offset.X+ 0.5f, fnl.Offset.Y+ 0.5f, 0);
+		fnl.Offset = new Vector3(fnl.Offset.X+ 0.5f, fnl.Offset.Y+ 0.5f, 0);
 	}
 }

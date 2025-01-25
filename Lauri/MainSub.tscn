@@ -1,10 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://dn8jjea5g51u2"]
+[gd_scene load_steps=11 format=3 uid="uid://dn8jjea5g51u2"]
 
 [ext_resource type="Script" path="res://Lauri/HumanControllableSubmarine.cs" id="1_g8j3o"]
 [ext_resource type="Texture2D" uid="uid://dxpos578r5ldd" path="res://Tomi/Sukellusvene.png" id="2_3v0rv"]
+[ext_resource type="Script" uid="uid://bvgbxiptbgvgy" path="res://Juuso/TorpedoLauncher.cs" id="3_3v0rv"]
+[ext_resource type="Texture2D" uid="uid://dvam1otplsm3x" path="res://Aku/FoamBoat.png" id="4_lfgb0"]
+[ext_resource type="Texture2D" uid="uid://bwgmwoxs4fcso" path="res://Aku/foamBoat/FoamBoat1.png" id="5_n1djb"]
+[ext_resource type="Texture2D" uid="uid://d34qg766q6qp6" path="res://Aku/foamBoat/FoamBoat2.png" id="6_s35we"]
+[ext_resource type="Texture2D" uid="uid://cdrgjx0w4fnq1" path="res://Aku/foamBoat/FoamBoat3.png" id="7_kmhok"]
+[ext_resource type="Texture2D" uid="uid://dx6m2wdpwt7x2" path="res://Aku/foamBoat/FoamBoat4.png" id="8_ku6sd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5mi43"]
 height = 118.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w5xae"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_n1djb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_s35we")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kmhok")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ku6sd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="HumanControllableSubmarine" type="CharacterBody2D"]
 script = ExtResource("1_g8j3o")
@@ -19,3 +45,20 @@ shape = SubResource("CapsuleShape2D_5mi43")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.98, 1.98)
+
+[node name="TorpedoSpawnPoint" type="Node2D" parent="."]
+position = Vector2(0, -66.165)
+script = ExtResource("3_3v0rv")
+
+[node name="Foam" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 11.57)
+scale = Vector2(0.121, 0.121)
+texture = ExtResource("4_lfgb0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 10.955)
+scale = Vector2(0.12, 0.12)
+sprite_frames = SubResource("SpriteFrames_w5xae")
+autoplay = "default"
+frame_progress = 0.220513

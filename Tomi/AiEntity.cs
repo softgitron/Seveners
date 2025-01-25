@@ -26,7 +26,7 @@ public partial class AiEntity : CharacterBody2D
 	public override void _Ready()
 	{
 		CallDeferred("SetMovementTarget");
-		terrain = GetNode<Terrain>("../../MapGeneration/Above Water");
+		terrain = GetNode<Terrain>("../../Above Water");
 	}
 
 	public void SetMovementTarget()

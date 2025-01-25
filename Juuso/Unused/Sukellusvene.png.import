@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hn5nkmrif83q"
-path="res://.godot/imported/taidetta.png-43ad6967dbdcac1a1e340c83aa70d1df.ctex"
+uid="uid://nyx440hj7hwq"
+path="res://.godot/imported/Sukellusvene.png-be7d6f050f602ccc21d0f9d8e6ae12a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Juuso/Assets/taidetta.png"
-dest_files=["res://.godot/imported/taidetta.png-43ad6967dbdcac1a1e340c83aa70d1df.ctex"]
+source_file="res://Juuso/Unused/Sukellusvene.png"
+dest_files=["res://.godot/imported/Sukellusvene.png-be7d6f050f602ccc21d0f9d8e6ae12a9.ctex"]
 
 [params]
 

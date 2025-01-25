@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://bb4kqa14q5url"]
 
-[ext_resource type="Script" uid="uid://bc7snya6xaxs8" path="res://Juuso/JuusonNoise.cs" id="1_726yc"]
-[ext_resource type="Shader" uid="uid://xho1325c5foi" path="res://Juuso/Noise testi Shader.gdshader" id="1_g4vns"]
-[ext_resource type="Texture2D" uid="uid://ce4rxxgsq1i65" path="res://Juuso/Assets/Juuson Noise Texture.tres" id="3_g4vns"]
-[ext_resource type="PackedScene" path="res://Juuso/Sukellusvene.tscn" id="4_dtmlg"]
+[ext_resource type="Shader" uid="uid://xho1325c5foi" path="res://Juuso/Noise testi Shader.gdshader" id="1_yp7dt"]
+[ext_resource type="Texture2D" uid="uid://ce4rxxgsq1i65" path="res://Juuso/Assets/Juuson Noise Texture.tres" id="2_dfb5l"]
+[ext_resource type="Script" uid="uid://bc7snya6xaxs8" path="res://Juuso/Noise Offset Mover.cs" id="3_7u3sc"]
+[ext_resource type="PackedScene" uid="uid://djdqim2ng5qoe" path="res://Juuso/Juuson Submarine.tscn" id="4_en5qs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtmlg"]
-shader = ExtResource("1_g4vns")
+shader = ExtResource("1_yp7dt")
 shader_parameter/isUnderWater = true
 shader_parameter/waterColor = Color(0.0967328, 0.334114, 1, 1)
 shader_parameter/landColor = Color(1.44392e-07, 0.529095, 2.5028e-06, 1)
@@ -20,7 +20,7 @@ shader_parameter/wallsColor = Color(0, 0, 0, 1)
 
 [node name="NoiseDisplay" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_dtmlg")
-texture = ExtResource("3_g4vns")
-script = ExtResource("1_726yc")
+texture = ExtResource("2_dfb5l")
+script = ExtResource("3_7u3sc")
 
-[node name="Sub" parent="." instance=ExtResource("4_dtmlg")]
+[node name="Sub" parent="." instance=ExtResource("4_en5qs")]
