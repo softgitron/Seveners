@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://p1odjpqw57v1"]
 
 [ext_resource type="PackedScene" uid="uid://sfu7ef1bosj4" path="res://Roni/MapGeneration/MapGeneration.tscn" id="1_clu67"]
-[ext_resource type="PackedScene" uid="uid://b66k3tl1gyn08" path="res://Tomi/EnemyBase.tscn" id="2_f3wpr"]
+[ext_resource type="PackedScene" path="res://Tomi/EnemyBase.tscn" id="2_f3wpr"]
 
 [node name="Roni" type="Node2D"]
 

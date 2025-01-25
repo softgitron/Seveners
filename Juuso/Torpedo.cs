@@ -6,6 +6,7 @@ public partial class Torpedo : CharacterBody2D
 	public float rotation;
 	public float direction;
 	float speed = 300;
+	float lifetime = 10;
 	public override void _Ready()
 	{
 		GlobalPosition = pos;
@@ -18,7 +19,17 @@ public partial class Torpedo : CharacterBody2D
 	}
 	public override void _PhysicsProcess(double delta)
 	{
-		Velocity = new Vector2(0,-speed).Rotated(direction);
-		MoveAndSlide();
+		var vel = new Vector2(0, -speed).Rotated(direction);
+		var collision = MoveAndCollide(vel * (float)delta);
+		if (collision != null){
+			QueueFree();
+		}
+	}
+	public override void _Process(double delta)
+	{
+		lifetime -= (float)delta;
+		if (lifetime < 0) {
+			QueueFree();
+		}
 	}
 }
