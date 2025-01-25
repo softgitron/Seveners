@@ -7,7 +7,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dtmlg"]
 shader = ExtResource("1_g4vns")
-shader_parameter/isUnderWater = false
+shader_parameter/isUnderWater = true
 shader_parameter/waterColor = Color(0.0967328, 0.334114, 1, 1)
 shader_parameter/landColor = Color(1.44392e-07, 0.529095, 2.5028e-06, 1)
 shader_parameter/sandColor = Color(0.697857, 0.538853, 0.264455, 1)

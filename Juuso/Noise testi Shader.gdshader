@@ -17,7 +17,7 @@ void vertex() {
 void fragment() {
 	// Called for every pixel the material is visible on.
 	vec4 pixelColor = texture(TEXTURE, UV);
-	if (false){
+	if (isUnderWater){
 		if (pixelColor.r < 0.4){
 			COLOR = bottomColor;
 		} else if (pixelColor.r < 0.5){
