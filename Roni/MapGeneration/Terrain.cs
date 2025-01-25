@@ -2,9 +2,9 @@ using Godot;
 
 public partial class Terrain : TileMapLayer
 {
-	[Export]
-	public int Width = 512;
-	public int Height = 512;
+	[Export] public int Width = 512;
+	[Export] public int Height = 512;
+	[Export] public bool UnderTheWater = false;
 	private FastNoiseLite Noise;
 
 	// Values go from -0.5 to 0.5
@@ -18,17 +18,24 @@ public partial class Terrain : TileMapLayer
 	public readonly Vector2I Sand0 = new (0,0);
 	public readonly Vector2I Sand1 = new (0,1);
 	public readonly Vector2I Grass0 = new (1,0);
+	public readonly Vector2I Grass1 = new (1,1);
 	public readonly Vector2I Hill0 = new (2,0);
+	public readonly Vector2I Hill1 = new (2,1);
 	public readonly Vector2I Mountain0 = new (3,0);
+	public readonly Vector2I Mountain1 = new (3,1);
 	public readonly Vector2I ShallowW0 = new (7,0);
+	public readonly Vector2I ShallowW1 = new (7,1);
 	public readonly Vector2I NormalW0 = new (8,0);
+	public readonly Vector2I NormalW1 = new (8,1);
 	public readonly Vector2I DeepW0 = new (9,0);
+	public readonly Vector2I DeepW1 = new (9,1);
 
 	private bool _generated = false;
 
 	public override void _Ready()
 	{
 		base._Ready();
+		GD.Print("GENERATE");
 		Noise = new()
 		{
 			Frequency = 0.01f,
@@ -60,19 +67,19 @@ public partial class Terrain : TileMapLayer
 					continue;
 				}
 				if (noiseValue > NOISE_VALUE_MOUNTAIN){
-					texture = Mountain0;
+					texture = UnderTheWater ? Mountain1 : Mountain0;
 				} else if (noiseValue > NOISE_VALUE_HILL){
-					texture = Hill0;
+					texture = UnderTheWater ? Hill1 : Hill0;
 				} else if (noiseValue > NOISE_VALUE_GRASS){
-					texture = Grass0;
+					texture = UnderTheWater ? Grass1 : Grass0;
 				} else if (noiseValue > NOISE_VALUE_SAND){
-					texture = Sand0;
+					texture = UnderTheWater ? Sand1 : Sand0;
 				} else if (noiseValue > NOISE_VALUE_SHALLOW_W){
-					texture = ShallowW0;
+					texture = UnderTheWater ? ShallowW1 : ShallowW0;
 				} else if (noiseValue > NOISE_VALUE_NORMAL_W){
-					texture = NormalW0;
+					texture = UnderTheWater ? NormalW1 : NormalW0;
 				} else {
-					texture = DeepW0;
+					texture = UnderTheWater ? DeepW1 : DeepW0;
 				}
 				SetCell(new Vector2I(x, y), 0, texture);
 			}
