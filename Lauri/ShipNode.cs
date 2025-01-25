@@ -1,11 +1,10 @@
 using Godot;
 using System;
-using System.ComponentModel.Design;
 using System.Diagnostics;
 
 public partial class ShipNode : CharacterBody2D
 {
-	
+
 	[Export]
 	public double Weight = 100;
 	[Export]
@@ -28,20 +27,22 @@ public partial class ShipNode : CharacterBody2D
 	public float SteerPower = 0.1f;
 	[Export]
 	public float SteerAngle = 0.005f;
+	[Export] TileMapLayer aboveWater;
+	[Export] TileMapLayer belowWater;
 
 	private Vector2 _currentDirection;
 
 	private Vector2 up = new Vector2(0, -1);
-	
+
 	public override void _Ready()
 	{
 		_currentDirection = new Vector2(0, -1);
 	}
-	
+
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
-		
+
 		_HandleInput(delta);
 
 		// Using MoveAndCollide.
@@ -54,7 +55,12 @@ public partial class ShipNode : CharacterBody2D
 
 	private void _HandleInput(double delta)
 	{
+		bool switchLayer = Input.IsActionJustPressed("surface");
 
+		if (switchLayer){
+			aboveWater.Enabled = !aboveWater.Enabled;
+			belowWater.CollisionEnabled = !aboveWater.Enabled;
+		}
 		bool powerUp = Input.IsActionJustPressed("power_up");
 		bool powerDown = Input.IsActionJustPressed("power_down");
 
@@ -75,27 +81,27 @@ public partial class ShipNode : CharacterBody2D
 		if (Input.IsActionPressed("throttle_up"))
 		{
 			CurrentRpm = Math.Min(CurrentRpm + ThrottleShiftInterval, CurrentMaxRpm);
-			Debug.Print(CurrentRpm.ToString());
+			//Debug.Print(CurrentRpm.ToString());
 		}
 
 		if (Input.IsActionPressed("throttle_down"))
 		{
 			CurrentRpm = Math.Max(CurrentRpm - ThrottleShiftInterval, MinRpm);
-			Debug.Print(CurrentRpm.ToString());
+			//Debug.Print(CurrentRpm.ToString());
 		}
 
 		if (Input.IsActionPressed("steer_left"))
 		{
 			_currentDirection = _currentDirection.Rotated(-SteerAngle);
 		}
-		
+
 		if (Input.IsActionPressed("steer_right"))
 		{
 			_currentDirection = _currentDirection.Rotated(SteerAngle);
 		}
 
 		CurrentSpeed = CurrentRpm;
-		Debug.Print(CurrentSpeed.ToString());
+		//Debug.Print(CurrentSpeed.ToString());
 
 		Velocity = _currentDirection * CurrentSpeed;
 		Rotation = -_currentDirection.AngleTo(up);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://sfu7ef1bosj4"]
+[gd_scene load_steps=9 format=3 uid="uid://sfu7ef1bosj4"]
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/pixel tile sheet.png" id="1_jsn6o"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="1_o8uow"]
@@ -54,6 +54,8 @@ texture_region_size = Vector2i(6, 6)
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
 7:1/0 = 0
 7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
+8:1/0 = 0
+9:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_jj57x"]
 tile_size = Vector2i(6, 6)
@@ -63,6 +65,16 @@ sources/0 = SubResource("TileSetAtlasSource_liryv")
 
 [node name="MapGeneration" type="Node2D"]
 
-[node name="Map" type="TileMapLayer" parent="."]
+[node name="Under Water" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_jj57x")
+collision_enabled = false
+script = ExtResource("1_o8uow")
+UnderTheWater = true
+
+[node name="Above Water" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_jj57x")
 script = ExtResource("1_o8uow")
+
+[node name="Submarine" parent="." node_paths=PackedStringArray("aboveWater", "belowWater") instance=ExtResource("3_liryv")]
+aboveWater = NodePath("../Above Water")
+belowWater = NodePath("../Under Water")
