@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b88fh74s682uh" path="res://Juuso/PlayerStats.cs" id="1_8um2a"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("healthBar")]
+[node name="PlayerStats" type="Control" node_paths=PackedStringArray("healthBar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
