@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/MapTileMapTexture.png" id="1_fos0i"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="2_3dxm6"]
-[ext_resource type="Shader" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
+[ext_resource type="Shader" uid="uid://d03fqs570k6o4" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
 [ext_resource type="PackedScene" uid="uid://dn8jjea5g51u2" path="res://Lauri/MainSub.tscn" id="4_trn2v"]
 [ext_resource type="Texture2D" uid="uid://blnrlp5di758c" path="res://Aku/splash.png" id="5_272bh"]
 [ext_resource type="Script" uid="uid://8gdwjtsxtgb5" path="res://Tomi/EnemySpawnerService.cs" id="5_lquwl"]
@@ -75,7 +75,6 @@ script = ExtResource("2_3dxm6")
 
 [node name="Player" parent="." node_paths=PackedStringArray("aboveWater", "belowWater") instance=ExtResource("4_trn2v")]
 position = Vector2(587, 329)
-collision_layer = 2
 collision_mask = 21
 aboveWater = NodePath("../Above Water")
 belowWater = NodePath("../Under Water")
@@ -105,8 +104,9 @@ enemyCount = 10
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="PlayerStats" parent="CanvasLayer" node_paths=PackedStringArray("sub") instance=ExtResource("6_7mycd")]
+[node name="PlayerStats" parent="CanvasLayer" node_paths=PackedStringArray("sub", "gameLogic") instance=ExtResource("6_7mycd")]
 sub = NodePath("../../Player")
+gameLogic = NodePath("../../MainGameLogic")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

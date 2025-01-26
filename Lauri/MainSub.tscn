@@ -50,9 +50,10 @@ animations = [{
 }]
 
 [node name="HumanControllableSubmarine" type="CharacterBody2D"]
-collision_layer = 9
-collision_mask = 9
+collision_layer = 2
+collision_mask = 21
 script = ExtResource("1_g8j3o")
+DefaultSteerAngle = 0.03
 
 [node name="SubSprite" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, 0.999998)

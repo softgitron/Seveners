@@ -18,11 +18,10 @@ radius = 500.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_path", "_torpedoLaunch")]
 collision_layer = 4
-collision_mask = 27
 motion_mode = 1
 script = ExtResource("1_0nn7a")
 _randomWaypointDistanceMultiplier = 6.0
-_movementSpeed = 5000.0
+_movementSpeed = 1000.0
 _movementTarget = NodePath("../Marker2D")
 _path = NodePath("Path2D")
 _torpedoLaunch = NodePath("TorpedoSpawnPoint")
@@ -40,19 +39,21 @@ shape = SubResource("RectangleShape2D_aw3sf")
 curve = SubResource("Curve2D_w1wp4")
 
 [node name="TorpedoSpawnPoint" type="Node2D" parent="CharacterBody2D"]
-position = Vector2(0, -70)
+position = Vector2(0, -38)
 
 [node name="FireTimer" type="Timer" parent="CharacterBody2D"]
-wait_time = 0.5
+wait_time = 2.0
 autostart = true
 
 [node name="FireArea" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/FireArea"]
 shape = SubResource("CircleShape2D_0nn7a")
 
 [node name="PlayerDetectionArea" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PlayerDetectionArea"]

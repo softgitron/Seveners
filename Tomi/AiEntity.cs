@@ -3,7 +3,6 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
-using System.Diagnostics;
 
 public partial class AiEntity : CharacterBody2D
 {
@@ -11,7 +10,7 @@ public partial class AiEntity : CharacterBody2D
 	[Export]
 	public float _randomWaypointDistanceMultiplier = 1;
 	[Export]
-	public float _movementSpeed = 1000f;
+	public float _movementSpeed = 500f;
 	[Export]
 	public float _turnSpeed = 0.01f;
 	[Export]
@@ -23,7 +22,7 @@ public partial class AiEntity : CharacterBody2D
 	[Export]
 	public Terrain terrain;
 
-	private PackedScene bulletScene = (PackedScene)GD.Load("res://Juuso/Torpedo.tscn");
+	private PackedScene bulletScene = (PackedScene)GD.Load("res://Juuso/TorpedoEnemy.tscn");
 	private const float CorrectionAngle = (float)Math.PI / 2;
 	private bool HasReachedDestination = false;
 	private List<Vector2> navigationPoints = [];
