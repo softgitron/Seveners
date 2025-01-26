@@ -55,7 +55,7 @@ public partial class Submarine : CharacterBody2D
 	protected Vector2 up = new Vector2(0, -1);
 	private Vector2 zero = new Vector2(0, 0);
 
-	private float health = 100;
+	public float health = 100;
 	public override void _Ready()
 	{
 		_currentDirection = new Vector2(0, -1);
@@ -97,6 +97,14 @@ public partial class Submarine : CharacterBody2D
 			Velocity = -Velocity * 0.5f;
 		}
 	}
+
+    public override void _Process(double delta){
+        if (health <= 0){
+            if (Modulate.A >= 0.25){
+                Modulate -= new Color(0,0,0,(float)delta);
+            }
+        }
+    }
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public void MoveToDepth(float depth)

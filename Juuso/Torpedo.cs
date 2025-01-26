@@ -30,7 +30,7 @@ public partial class Torpedo : CharacterBody2D
 			if (collision.GetCollider() is Submarine)
 			{
 				var player = (Submarine)collision.GetCollider();
-				player.TakeDamage(10);
+				player.TakeDamage(15);
 			}
 			if (collision.GetCollider() is AiEntity)
 			{

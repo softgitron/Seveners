@@ -35,7 +35,7 @@ public partial class AiEntity : CharacterBody2D
 	public void TakeDamage(float damage){
 		health -= damage;
 		if (health <= 0) {
-			QueueFree();
+			//QueueFree();
 		}
 	}
 
@@ -116,6 +116,15 @@ public partial class AiEntity : CharacterBody2D
 		if (what == NotificationExitTree) NodeCollection.Instance.UnregisterNode(this);
 	}
 
+	public override void _Process(double delta)
+	{
+		if (health <=0){
+			Modulate -= new Color(0,0,0,(float)delta);
+			if (Modulate.A <= 0){
+				QueueFree();
+			}
+		}
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		if (navigationPoints.Count == 0)
@@ -184,7 +193,9 @@ public partial class AiEntity : CharacterBody2D
 
 	public void _on_timer_timeout()
 	{
-		Fire();
+		if (health > 0){
+			Fire();
+		}
 	}
 
 	public void _on_navigation_timer_timeout()
