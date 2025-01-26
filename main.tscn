@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://6smyb87bxo7n"]
+[gd_scene load_steps=14 format=3 uid="uid://d34em5aymnxn8"]
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/MapTileMapTexture.png" id="1_fos0i"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="2_3dxm6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://blnrlp5di758c" path="res://Aku/splash.png" id="5_272bh"]
 [ext_resource type="PackedScene" uid="uid://cfoyiiot5nsm0" path="res://Juuso/Player Stats.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://e6nr6geoy303" path="res://Roni/MainGameLogic.cs" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://dn343gw0u6o7p" path="res://Roni/Enemy.tscn" id="8_5vw27"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jsn6o"]
 vertices = PackedVector2Array(3, 3, -3, 3, -3, -3, 3, -3)
@@ -115,5 +116,8 @@ offset_right = 330.0
 offset_bottom = -105.0
 grow_vertical = 0
 text = "Level: 1"
+
+[node name="Enemy" parent="." instance=ExtResource("8_5vw27")]
+position = Vector2(400, 600)
 
 [connection signal="body_entered" from="Goal" to="MainGameLogic" method="_on_goal_body_entered"]

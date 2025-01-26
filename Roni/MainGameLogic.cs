@@ -32,12 +32,13 @@ public partial class MainGameLogic : Node
 	{
 		Player.Reset();
 		GenerateMap();
-		SpawnPlayerAndGoal();
+		// SpawnPlayerAndGoal();
 	}
 
 	private void GenerateMap()
 	{
 		var seed = Random.Next();
+		seed = 0;
 		AboveWater.Initialize(seed);
 		BelowWater.Initialize(seed);
 	}
@@ -77,7 +78,11 @@ public partial class MainGameLogic : Node
 
 			try
 			{
-				Terrain.NavigationAgent.GetPointPath(playerMapPosition, playerGoalMapPosition);
+				var route = Terrain.NavigationAgent.GetPointPath(playerMapPosition, playerGoalMapPosition);
+				if (route.Length == 0)
+				{
+					continue;
+				}
 			}
 			catch (Exception)
 			{
