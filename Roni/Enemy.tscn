@@ -12,7 +12,7 @@ size = Vector2(170, 820)
 radius = 350.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85mac"]
-radius = 500.0
+radius = 650.0
 
 [node name="Enemy" type="Node2D"]
 
@@ -62,7 +62,6 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_85mac")
 
 [node name="NavigationTimer" type="Timer" parent="CharacterBody2D"]
-wait_time = 2.0
 autostart = true
 
 [node name="Marker2D" type="Marker2D" parent="."]

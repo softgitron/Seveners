@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dj8k08540xcu0"]
+[gd_scene load_steps=6 format=3 uid="uid://ee7uqei2rxa"]
 
 [ext_resource type="Script" uid="uid://dwn0yc3yunv21" path="res://Aku/WinScreen.cs" id="1_sjpf7"]
 [ext_resource type="Texture2D" uid="uid://b5fbihplk2x18" path="res://Aku/GameLost.jpg" id="2_sjpf7"]
