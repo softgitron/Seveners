@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://6smyb87bxo7n"]
+[gd_scene load_steps=14 format=3 uid="uid://6smyb87bxo7n"]
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/MapTileMapTexture.png" id="1_fos0i"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="2_3dxm6"]
-[ext_resource type="Shader" uid="uid://d03fqs570k6o4" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
+[ext_resource type="Shader" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
 [ext_resource type="PackedScene" uid="uid://dn8jjea5g51u2" path="res://Lauri/MainSub.tscn" id="4_trn2v"]
 [ext_resource type="Texture2D" uid="uid://blnrlp5di758c" path="res://Aku/splash.png" id="5_272bh"]
+[ext_resource type="Script" uid="uid://8gdwjtsxtgb5" path="res://Tomi/EnemySpawnerService.cs" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cfoyiiot5nsm0" path="res://Juuso/Player Stats.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://e6nr6geoy303" path="res://Roni/MainGameLogic.cs" id="7_272bh"]
 
@@ -63,11 +64,13 @@ tile_set = SubResource("TileSet_kek77")
 collision_enabled = false
 script = ExtResource("2_3dxm6")
 UnderTheWater = true
+SafetyLimit = 60
 
 [node name="Above Water" type="TileMapLayer" parent="."]
 material = SubResource("ShaderMaterial_4c57u")
 tile_set = SubResource("TileSet_kek77")
 script = ExtResource("2_3dxm6")
+SafetyLimit = 60
 
 [node name="Player" parent="." node_paths=PackedStringArray("aboveWater", "belowWater") instance=ExtResource("4_trn2v")]
 position = Vector2(587, 329)
@@ -87,13 +90,18 @@ texture = ExtResource("5_272bh")
 [node name="GoalCollider" type="CollisionShape2D" parent="Goal"]
 shape = SubResource("CapsuleShape2D_272bh")
 
-[node name="MainGameLogic" type="Node2D" parent="." node_paths=PackedStringArray("Terrain", "Player", "Goal", "AboveWater", "BelowWater")]
+[node name="MainGameLogic" type="Node2D" parent="." node_paths=PackedStringArray("Terrain", "Player", "Goal", "AboveWater", "BelowWater", "SpawnerService")]
 script = ExtResource("7_272bh")
 Terrain = NodePath("../Above Water")
 Player = NodePath("../Player")
 Goal = NodePath("../Goal")
 AboveWater = NodePath("../Above Water")
 BelowWater = NodePath("../Under Water")
+SpawnerService = NodePath("../SpawnerService")
+
+[node name="SpawnerService" type="Node2D" parent="."]
+script = ExtResource("5_lquwl")
+enemyCount = 10
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -116,4 +124,9 @@ offset_bottom = -105.0
 grow_vertical = 0
 text = "Level: 1"
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
 [connection signal="body_entered" from="Goal" to="MainGameLogic" method="_on_goal_body_entered"]
+[connection signal="timeout" from="Timer" to="SpawnerService" method="_on_timer_timeout"]

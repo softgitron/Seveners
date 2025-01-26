@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 
 public partial class AiEntity : CharacterBody2D
 {
@@ -17,23 +18,24 @@ public partial class AiEntity : CharacterBody2D
 	public Marker2D _movementTarget;
 	[Export]
 	public Path2D _path;
+	[Export]
+	public Terrain terrain;
 
 	private const float CorrectionAngle = (float)Math.PI / 2;
 	private bool HasReachedDestination = false;
-
-	private Terrain terrain;
 	private List<Vector2> navigationPoints = [];
 	private Vector2 currentNavigationTarget;
 
 	public override void _Ready()
 	{
+        terrain = GetNode<Terrain>("../../../Above Water");
 		CallDeferred("SetMovementTarget");
-		terrain = GetNode<Terrain>("../../Above Water");
 		NodeCollection.Instance.RegisterNode(this);
 	}
 
 	public void SetMovementTarget()
 	{
+		Debug.Print("Targetting terrain coordinate...: " + _movementTarget.ToString());
 		var targetTerrainCoordinate = WorldCoordinateToTerrainCoordinate(_movementTarget.GlobalPosition);
 		var currentTerrainCoordinate = WorldCoordinateToTerrainCoordinate(GlobalPosition);
 
@@ -75,8 +77,6 @@ public partial class AiEntity : CharacterBody2D
 		var random = new Random();
 		var newTargetForPatrol = GlobalPosition;
 
-
-
 		while (!isTargetValid)
 		{
 			var wayPointDistance = random.Next(1, (int)Math.Round(500 * _randomWaypointDistanceMultiplier, 0));
@@ -94,7 +94,7 @@ public partial class AiEntity : CharacterBody2D
 			{
 				isTargetValid = true;
 			}
-		}
+        }
 		_movementTarget.GlobalPosition = newTargetForPatrol;
 	}
 	

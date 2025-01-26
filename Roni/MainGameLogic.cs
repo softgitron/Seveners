@@ -18,7 +18,10 @@ public partial class MainGameLogic : Node
 	[Export]
 	public Terrain BelowWater;
 
-	public int level = 1;
+    [Export]
+    public EnemySpawnerService SpawnerService;
+
+    public int level = 1;
 
 	private Random Random = new();
 
@@ -32,6 +35,8 @@ public partial class MainGameLogic : Node
 	{
 		Player.Reset();
 		GenerateMap();
+		//SpawnerService.Initialize(AboveWater);
+		//SpawnerService.CreateEnemies();
 		SpawnPlayerAndGoal();
 	}
 
@@ -41,6 +46,7 @@ public partial class MainGameLogic : Node
 		AboveWater.Initialize(seed);
 		BelowWater.Initialize(seed);
 	}
+
 
 	private void SpawnPlayerAndGoal()
 	{
