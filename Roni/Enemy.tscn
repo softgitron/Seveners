@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dn343gw0u6o7p"]
+[gd_scene load_steps=7 format=3 uid="uid://dn343gw0u6o7p"]
 
 [ext_resource type="Script" uid="uid://dadk78pog2vxq" path="res://Tomi/AiEntity.cs" id="1_0nn7a"]
 [ext_resource type="Texture2D" uid="uid://dk1au0peyttiv" path="res://Tomi/Sukellusvene2.png" id="2_85mac"]
@@ -8,9 +8,15 @@ size = Vector2(170, 820)
 
 [sub_resource type="Curve2D" id="Curve2D_w1wp4"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0nn7a"]
+radius = 350.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_85mac"]
+radius = 500.0
+
 [node name="Enemy" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_path")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_path", "_torpedoLaunch")]
 collision_layer = 4
 collision_mask = 27
 motion_mode = 1
@@ -19,6 +25,7 @@ _randomWaypointDistanceMultiplier = 6.0
 _movementSpeed = 5000.0
 _movementTarget = NodePath("../Marker2D")
 _path = NodePath("Path2D")
+_torpedoLaunch = NodePath("TorpedoSpawnPoint")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(0.1, 0.1)
@@ -32,4 +39,34 @@ shape = SubResource("RectangleShape2D_aw3sf")
 [node name="Path2D" type="Path2D" parent="CharacterBody2D"]
 curve = SubResource("Curve2D_w1wp4")
 
+[node name="TorpedoSpawnPoint" type="Node2D" parent="CharacterBody2D"]
+position = Vector2(0, -70)
+
+[node name="FireTimer" type="Timer" parent="CharacterBody2D"]
+wait_time = 0.5
+autostart = true
+
+[node name="FireArea" type="Area2D" parent="CharacterBody2D"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/FireArea"]
+shape = SubResource("CircleShape2D_0nn7a")
+
+[node name="PlayerDetectionArea" type="Area2D" parent="CharacterBody2D"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/PlayerDetectionArea"]
+shape = SubResource("CircleShape2D_85mac")
+
+[node name="NavigationTimer" type="Timer" parent="CharacterBody2D"]
+wait_time = 2.0
+autostart = true
+
 [node name="Marker2D" type="Marker2D" parent="."]
+
+[connection signal="timeout" from="CharacterBody2D/FireTimer" to="CharacterBody2D" method="_on_timer_timeout"]
+[connection signal="body_entered" from="CharacterBody2D/FireArea" to="CharacterBody2D" method="_on_fire_area_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/FireArea" to="CharacterBody2D" method="_on_fire_area_body_exited"]
+[connection signal="body_entered" from="CharacterBody2D/PlayerDetectionArea" to="CharacterBody2D" method="_on_player_detection_area_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/PlayerDetectionArea" to="CharacterBody2D" method="_on_player_detection_area_body_exited"]
+[connection signal="timeout" from="CharacterBody2D/NavigationTimer" to="CharacterBody2D" method="_on_navigation_timer_timeout"]

@@ -84,22 +84,22 @@ public partial class Terrain : TileMapLayer
 		return true;
 	}
 
-    public Vector2I WorldCoordinateToTerrainCoordinate(Vector2 globalCoordinate)
-    {
-        var localPosition = this.ToLocal(globalCoordinate);
-        var terrainCoordinate = this.LocalToMap(localPosition);
-        return terrainCoordinate;
-    }
+	public Vector2I WorldCoordinateToTerrainCoordinate(Vector2 globalCoordinate)
+	{
+		var localPosition = this.ToLocal(globalCoordinate);
+		var terrainCoordinate = this.LocalToMap(localPosition);
+		return terrainCoordinate;
+	}
 
-    public Vector2 TerrainCoordinateToWorldCoordinate(Vector2 terrainCoordinate)
-    {
-        var terrainInterface = (Vector2I)terrainCoordinate;
-        var localPosition = this.MapToLocal(terrainInterface);
-        var globalPosition = this.ToGlobal(localPosition);
-        return globalPosition;
-    }
+	public Vector2 TerrainCoordinateToWorldCoordinate(Vector2 terrainCoordinate)
+	{
+		var terrainInterface = (Vector2I)terrainCoordinate;
+		var localPosition = this.MapToLocal(terrainInterface);
+		var globalPosition = this.ToGlobal(localPosition);
+		return globalPosition;
+	}
 
-    private bool Generate()
+	private bool Generate()
 	{
 		GenerateMapBoundary();
 

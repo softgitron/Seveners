@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfoyiiot5nsm0"]
+[gd_scene load_steps=3 format=3 uid="uid://cfoyiiot5nsm0"]
 
 [ext_resource type="Script" uid="uid://b88fh74s682uh" path="res://Juuso/PlayerStats.cs" id="1_8um2a"]
 
-[node name="PlayerStats" type="Control" node_paths=PackedStringArray("healthBar", "gearText")]
+[sub_resource type="LabelSettings" id="LabelSettings_8um2a"]
+font_size = 36
+
+[node name="PlayerStats" type="Control" node_paths=PackedStringArray("healthBar", "gearText", "levelText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +17,7 @@ size_flags_vertical = 3
 script = ExtResource("1_8um2a")
 healthBar = NodePath("Health Bar")
 gearText = NodePath("Gear")
+levelText = NodePath("Level")
 
 [node name="Health Bar" type="ProgressBar" parent="."]
 modulate = Color(1, 0.267492, 0.265256, 1)
@@ -28,7 +32,7 @@ offset_bottom = -30.0
 grow_vertical = 0
 value = 5.0
 
-[node name="Label" type="Label" parent="."]
+[node name="Health Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -39,6 +43,18 @@ offset_right = 40.0
 offset_bottom = -60.0
 grow_vertical = 0
 text = "Health"
+
+[node name="Level" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -147.0
+offset_right = 82.0
+offset_bottom = -124.0
+grow_vertical = 0
+text = "Level 1"
 
 [node name="Gear" type="Label" parent="."]
 layout_mode = 1
@@ -51,3 +67,17 @@ offset_right = 82.0
 offset_bottom = -85.0
 grow_vertical = 0
 text = "Gear: 5"
+label_settings = SubResource("LabelSettings_8um2a")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 346.0
+offset_bottom = 156.0
+bbcode_enabled = true
+text = "[color=yellow]Move[/color] : Arrow keys or WASD
+[color=yellow]Change Gear[/color] : Z & X or Q & E
+[color=yellow]Shoot[/color] : C or 1
+[color=yellow]Dive / Surface[/color] : V or R"

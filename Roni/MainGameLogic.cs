@@ -18,10 +18,11 @@ public partial class MainGameLogic : Node
 	[Export]
 	public Terrain BelowWater;
 
-    [Export]
-    public EnemySpawnerService SpawnerService;
+	[Export]
+	public EnemySpawnerService SpawnerService;
 
-    public int level = 1;
+	public int level = 1;
+	[Signal] public delegate void LevelCangedEventHandler(int level);
 
 	private Random Random = new();
 
@@ -35,8 +36,6 @@ public partial class MainGameLogic : Node
 	{
 		Player.Reset();
 		GenerateMap();
-		//SpawnerService.Initialize(AboveWater);
-		//SpawnerService.CreateEnemies();
 		SpawnPlayerAndGoal();
 	}
 
@@ -83,7 +82,11 @@ public partial class MainGameLogic : Node
 
 			try
 			{
-				Terrain.NavigationAgent.GetPointPath(playerMapPosition, playerGoalMapPosition);
+				var route = Terrain.NavigationAgent.GetPointPath(playerMapPosition, playerGoalMapPosition);
+				if (route.Length == 0)
+				{
+					continue;
+				}
 			}
 			catch (Exception)
 			{
@@ -102,6 +105,7 @@ public partial class MainGameLogic : Node
 		if (node is HumanControllableSubmarine)
 		{
 			level++;
+			EmitSignal(SignalName.LevelCanged, level);
 			Initialize();
 		}
 	}

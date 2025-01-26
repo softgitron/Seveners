@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 public partial class AiEntity : CharacterBody2D
 {
-	
+
 	[Export]
 	public float _randomWaypointDistanceMultiplier = 1;
 	[Export]
@@ -19,16 +19,21 @@ public partial class AiEntity : CharacterBody2D
 	[Export]
 	public Path2D _path;
 	[Export]
+	public Node2D _torpedoLaunch;
+	[Export]
 	public Terrain terrain;
 
+	private PackedScene bulletScene = (PackedScene)GD.Load("res://Juuso/Torpedo.tscn");
 	private const float CorrectionAngle = (float)Math.PI / 2;
 	private bool HasReachedDestination = false;
 	private List<Vector2> navigationPoints = [];
 	private Vector2 currentNavigationTarget;
+	private bool firing = false;
+	private Node2D player = null;
 
 	public override void _Ready()
 	{
-        terrain = GetNode<Terrain>("../../../Above Water");
+		terrain = GetNode<Terrain>("../../../Above Water");
 		CallDeferred("SetMovementTarget");
 		NodeCollection.Instance.RegisterNode(this);
 	}
@@ -86,7 +91,7 @@ public partial class AiEntity : CharacterBody2D
 			if (!terrain.validateMapBounds(newTargetForPatrol))
 			{
 				continue;
-			};
+			}
 
 			var mapNavigationPoints = terrain.NavigationAgent.GetPointPath(WorldCoordinateToTerrainCoordinate(GlobalPosition), WorldCoordinateToTerrainCoordinate(newTargetForPatrol), false);
 
@@ -94,10 +99,10 @@ public partial class AiEntity : CharacterBody2D
 			{
 				isTargetValid = true;
 			}
-        }
+		}
 		_movementTarget.GlobalPosition = newTargetForPatrol;
 	}
-	
+
 	public override void _Notification(int what)
 	{
 		if (what == NotificationExitTree) NodeCollection.Instance.UnregisterNode(this);
@@ -130,5 +135,72 @@ public partial class AiEntity : CharacterBody2D
 		// Ei toimi jostain syystä saatana. Ei mee signaalit perille.
 		//SignalBus.Instance.EmitSignal(SignalBus.RadarLocationRegisteredName, GlobalPosition);
 		MoveAndSlide();
+	}
+
+	public void _on_player_detection_area_body_entered(Node2D node)
+	{
+		if (node is not HumanControllableSubmarine)
+		{
+			return;
+		}
+		player = node;
+	}
+
+	public void _on_player_detection_area_body_exited(Node2D node)
+	{
+		if (node is not HumanControllableSubmarine)
+		{
+			return;
+		}
+
+		player = null;
+		AssignNewTarget();
+		SetMovementTarget();
+	}
+
+	public void _on_fire_area_body_entered(Node2D node)
+	{
+		if (node is HumanControllableSubmarine)
+		{
+			firing = true;
+		}
+	}
+
+	public void _on_fire_area_body_exited(Node2D node)
+	{
+		if (node is HumanControllableSubmarine)
+		{
+			firing = false;
+		}
+	}
+
+	public void _on_timer_timeout()
+	{
+		Fire();
+	}
+
+	public void _on_navigation_timer_timeout()
+	{
+		if (player == null)
+		{
+			return;
+		}
+
+		_movementTarget.GlobalPosition = player.GlobalPosition;
+		SetMovementTarget();
+	}
+
+	public void Fire()
+	{
+		if (!firing)
+		{
+			return;
+		}
+
+		Torpedo torpedo = (Torpedo)bulletScene.Instantiate();
+		torpedo.pos = _torpedoLaunch.GlobalPosition;
+		torpedo.direction = _torpedoLaunch.GlobalRotation;
+		torpedo.rotation = _torpedoLaunch.GlobalRotation;
+		GetTree().Root.AddChild(torpedo);
 	}
 }
