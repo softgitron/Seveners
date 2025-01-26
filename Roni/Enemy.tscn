@@ -21,7 +21,6 @@ collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_0nn7a")
 _randomWaypointDistanceMultiplier = 6.0
-_movementSpeed = 1000.0
 _movementTarget = NodePath("../Marker2D")
 _path = NodePath("Path2D")
 _torpedoLaunch = NodePath("TorpedoSpawnPoint")
