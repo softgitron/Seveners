@@ -8,7 +8,7 @@ public partial class EnemySpawnerService : Node2D
 	//[Export]
 	PackedScene _enemy;
 	[Export]
-	int enemyCount;
+	public int enemyCount;
 
 	private const int PIXEL_SIZE = 6;
 
@@ -120,5 +120,15 @@ public partial class EnemySpawnerService : Node2D
 		_terrain = GetNode<Terrain>("../Above Water");
 		CreateEnemies();
 		Debug.Print("Done creating enemies");
+	}
+
+	public void ResetEnemies()
+	{
+		var children = GetChildren();
+		foreach (var child in children)
+		{
+			child.QueueFree();
+		}
+		CreateEnemies();
 	}
 }

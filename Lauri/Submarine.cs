@@ -147,7 +147,7 @@ public partial class Submarine : CharacterBody2D
 		CurrentGear = 1;
 		CurrentRpm = 0;
 		Velocity = Vector2.Zero;
-        health = 100;
+		health = 100;
 	}
 
 	private void _on_timer_timeout()
