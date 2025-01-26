@@ -202,7 +202,7 @@ public partial class Terrain : TileMapLayer
 
 	public void GenerateMapBoundary() {
 
-        Debug.Print("Starting to create Boundary");
+        //Debug.Print("Starting to create Boundary");
         for (var y = 0; y < (BoundaryDepth*2 + Height); y++)
 		{
 
@@ -215,7 +215,7 @@ public partial class Terrain : TileMapLayer
                     continue;
                 }
 
-                Debug.Print("Trying to create BoundaryCell");
+                //Debug.Print("Trying to create BoundaryCell");
                 var coordinate = new Vector2I(x, y);
                 Vector2I texture;
                 if (UnderTheWater)
@@ -230,39 +230,6 @@ public partial class Terrain : TileMapLayer
                 SetCell(coordinate, 0, texture);
             }
 		}
-        Debug.Print("Finished Creating Boundary");
+        //Debug.Print("Finished Creating Boundary");
     }
-
-
-	//public bool GenerateMapBoundary()
-	//{
-	//	for (var y = 0; y < (BoundaryDepth*2 + Height); y++)
-	//	{
-	//		if (y >= BoundaryDepth || y < Height+BoundaryDepth)
-	//		{
-	//			continue;
-	//		}
-	//		for (var x = 0; x < (BoundaryDepth*2 + Width); x++)
-	//		{
-	//			if (x >= BoundaryDepth || x < Width+BoundaryDepth)
-	//			{
-	//				continue;
-	//			}
-	//			Debug.Print("Trying to create BoundaryCell");
- //               var coordinate = new Vector2I(x, y);
- //               Vector2I texture;
- //               if (UnderTheWater)
- //               {
- //                   texture = Sand1;
- //               }
- //               else
- //               {
- //                   texture = Sand0;
- //               }
- //               NavigationAgent.SetPointSolid(coordinate);
- //               SetCell(new Vector2I(x, y), 0, texture);
- //           }
-	//	}
-	//	return true;
-	//}
 }
