@@ -107,6 +107,8 @@ public partial class MainGameLogic : Node
 			level++;
 			EmitSignal(SignalName.LevelCanged, level);
 			Initialize();
+			SpawnerService.enemyCount += 3;
+			SpawnerService.ResetEnemies();
 		}
 	}
 
