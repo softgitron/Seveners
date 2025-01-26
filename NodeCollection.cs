@@ -5,6 +5,9 @@ using Godot.Collections;
 public partial class NodeCollection : Node
 {
 
+	// this is here because  much hurry;
+	public static int RadarScale = 10;
+
 	public const string RadarLocationRegisteredName = "RadarLocationRegistered";
 
 	public static NodeCollection Instance { get; private set; }

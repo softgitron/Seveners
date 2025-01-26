@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=4 uid="uid://d34em5aymnxn8"]
+[gd_scene load_steps=16 format=4 uid="uid://3fnbgnnspg2n"]
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/MapTileMapTexture.png" id="1_fos0i"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="2_3dxm6"]
 [ext_resource type="Shader" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
 [ext_resource type="PackedScene" uid="uid://dn8jjea5g51u2" path="res://Lauri/MainSub.tscn" id="4_trn2v"]
 [ext_resource type="Texture2D" uid="uid://d1pplfjnuoye4" path="res://Aku/Goal.png" id="5_5vw27"]
+[ext_resource type="Script" uid="uid://k2vh6hxnvrfv" path="res://Goal.cs" id="5_kek77"]
 [ext_resource type="Script" uid="uid://8gdwjtsxtgb5" path="res://Tomi/EnemySpawnerService.cs" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cfoyiiot5nsm0" path="res://Juuso/Player Stats.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://e6nr6geoy303" path="res://Roni/MainGameLogic.cs" id="7_272bh"]
@@ -82,6 +83,7 @@ belowWater = NodePath("../Under Water")
 [node name="Goal" type="Area2D" parent="."]
 position = Vector2(14, 48)
 collision_mask = 2
+script = ExtResource("5_kek77")
 
 [node name="GoalSprite" type="Sprite2D" parent="Goal"]
 scale = Vector2(0.2, 0.2)
