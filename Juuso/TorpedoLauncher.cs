@@ -6,7 +6,7 @@ public partial class TorpedoLauncher : Node2D
 	PackedScene bulletScene = (PackedScene)GD.Load("res://Juuso/Torpedo.tscn");
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("shoot_0")){
+		if (Input.IsActionJustPressed("shoot")){
 			GD.Print("Shoow");
 			Fire();
 		}
@@ -16,7 +16,7 @@ public partial class TorpedoLauncher : Node2D
 		Torpedo torpedo = (Torpedo)bulletScene.Instantiate();
 		torpedo.pos = GlobalPosition;
 		torpedo.direction = GlobalRotation;
-        GD.Print(Rotation);
+		GD.Print(Rotation);
 		torpedo.rotation = GlobalRotation;
 		GetTree().Root.AddChild(torpedo);
 	}

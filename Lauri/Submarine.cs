@@ -63,6 +63,7 @@ public partial class Submarine : CharacterBody2D
 	}
 
 	[Signal] public delegate void HealthCangedEventHandler(float newHealth);
+	[Signal] public delegate void GearCangedEventHandler(int metalGear);
 	public void TakeDamage(float damage)
 	{
 		health -= damage;
@@ -102,6 +103,7 @@ public partial class Submarine : CharacterBody2D
 		Depth = depth;
 		isAboveWater = !isAboveWater;
 		aboveMaterial.SetShaderParameter("isUnderWater", !isAboveWater);
+		aboveWater.CollisionEnabled = isAboveWater;
 		belowWater.CollisionEnabled = !isAboveWater; // This causes lag spike! TODO: Maybe better approach would be to change what colliders player reacts to (so no hiding colliders)
 		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Visible = isAboveWater;
 	}
@@ -135,6 +137,8 @@ public partial class Submarine : CharacterBody2D
 
 		CurrentMaxRpm = Math.Max(Math.Min(BaseMaxRpm * Math.Abs(CurrentGear), MaxRpm), MinRpm);
 		//Debug.Print("CurrentMaxRpm changed to: " + CurrentMaxRpm.ToString());
+		EmitSignal(SignalName.GearCanged, CurrentGear);
+
 	}
 
 	public void Reset()
