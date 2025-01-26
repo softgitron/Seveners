@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=4 uid="uid://d34em5aymnxn8"]
+[gd_scene load_steps=15 format=4 uid="uid://3fnbgnnspg2n"]
 
 [ext_resource type="Texture2D" uid="uid://dwpq6u2b1nq2e" path="res://Juuso/Assets/MapTileMapTexture.png" id="1_fos0i"]
 [ext_resource type="Script" uid="uid://d2878d6bh54tb" path="res://Roni/MapGeneration/Terrain.cs" id="2_3dxm6"]
-[ext_resource type="Shader" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
+[ext_resource type="Shader" uid="uid://d03fqs570k6o4" path="res://Juuso/AboveWaterShader.gdshader" id="3_lgr22"]
 [ext_resource type="PackedScene" uid="uid://dn8jjea5g51u2" path="res://Lauri/MainSub.tscn" id="4_trn2v"]
 [ext_resource type="Texture2D" uid="uid://d1pplfjnuoye4" path="res://Aku/Goal.png" id="5_5vw27"]
 [ext_resource type="Script" uid="uid://8gdwjtsxtgb5" path="res://Tomi/EnemySpawnerService.cs" id="5_lquwl"]
@@ -91,13 +91,14 @@ texture = ExtResource("5_5vw27")
 position = Vector2(2, 2)
 shape = SubResource("CapsuleShape2D_272bh")
 
-[node name="MainGameLogic" type="Node2D" parent="." node_paths=PackedStringArray("Terrain", "Player", "Goal", "AboveWater", "BelowWater")]
+[node name="MainGameLogic" type="Node2D" parent="." node_paths=PackedStringArray("Terrain", "Player", "Goal", "AboveWater", "BelowWater", "SpawnerService")]
 script = ExtResource("7_272bh")
 Terrain = NodePath("../Above Water")
 Player = NodePath("../Player")
 Goal = NodePath("../Goal")
 AboveWater = NodePath("../Above Water")
 BelowWater = NodePath("../Under Water")
+SpawnerService = NodePath("../SpawnerService")
 
 [node name="SpawnerService" type="Node2D" parent="."]
 script = ExtResource("5_lquwl")
