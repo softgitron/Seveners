@@ -98,13 +98,13 @@ public partial class Submarine : CharacterBody2D
 		}
 	}
 
-    public override void _Process(double delta){
-        if (health <= 0){
-            if (Modulate.A >= 0.25){
-                Modulate -= new Color(0,0,0,(float)delta);
-            }
-        }
-    }
+	public override void _Process(double delta){
+		if (health <= 0){
+			if (Modulate.A >= 0.25){
+				Modulate -= new Color(0,0,0,(float)delta);
+			}
+		}
+	}
 
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public void MoveToDepth(float depth)

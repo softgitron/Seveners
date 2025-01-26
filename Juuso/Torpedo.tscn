@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://0a61absxvaxs"]
+[gd_scene load_steps=5 format=3 uid="uid://c5os3xpcpy6hr"]
 
 [ext_resource type="Texture2D" uid="uid://dmd2bpcm44s2m" path="res://Juuso/Assets/torpedo_PNG5.png" id="1_1ar2e"]
 [ext_resource type="Script" uid="uid://d4gwub7d8uee8" path="res://Juuso/Torpedo.cs" id="1_hebt1"]
