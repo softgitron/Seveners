@@ -50,6 +50,8 @@ animations = [{
 }]
 
 [node name="HumanControllableSubmarine" type="CharacterBody2D"]
+collision_layer = 9
+collision_mask = 9
 script = ExtResource("1_g8j3o")
 
 [node name="SubSprite" type="Sprite2D" parent="."]
