@@ -60,6 +60,7 @@ public partial class Submarine : CharacterBody2D
 	{
 		_currentDirection = new Vector2(0, -1);
 		aboveMaterial = (ShaderMaterial)aboveWater.Material;
+		NodeCollection.Instance.RegisterNode(this);
 	}
 
 	[Signal] public delegate void HealthCangedEventHandler(float newHealth);
@@ -156,6 +157,11 @@ public partial class Submarine : CharacterBody2D
 	private void HandleAudio()
 	{
 
+	}
+	
+	public override void _Notification(int what)
+	{
+		if (what == NotificationExitTree) NodeCollection.Instance.UnregisterNode(this);
 	}
 
 }
