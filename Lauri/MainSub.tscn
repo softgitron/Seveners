@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dn8jjea5g51u2"]
+[gd_scene load_steps=17 format=3 uid="uid://dn8jjea5g51u2"]
 
 [ext_resource type="Script" uid="uid://bs1yskhl7rvm0" path="res://Lauri/HumanControllableSubmarine.cs" id="1_g8j3o"]
 [ext_resource type="Texture2D" uid="uid://dxpos578r5ldd" path="res://Tomi/Sukellusvene.png" id="2_3v0rv"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bacs27p3dndje" path="res://Aku/foamBoat/FoamBoat6.png" id="10_ngbls"]
 [ext_resource type="Texture2D" uid="uid://dw1ree3tbvw8i" path="res://Aku/foamBoat/FoamBoat7.png" id="11_wblw6"]
 [ext_resource type="Texture2D" uid="uid://c8h4vu3hhqou7" path="res://Aku/foamBoat/FoamBoat8.png" id="12_at0dn"]
+[ext_resource type="AudioStream" uid="uid://lpekabrwfwa1" path="res://Roni/SonarSound.mp3" id="14_wblw6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5mi43"]
 height = 118.0
@@ -112,3 +113,9 @@ offset_bottom = 151.0
 
 [node name="Label" type="Label" parent="CanvasLayer/SubViewportContainer"]
 layout_mode = 2
+
+[node name="SonarPing" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_wblw6")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true
