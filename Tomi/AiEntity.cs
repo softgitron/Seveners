@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 
 public partial class AiEntity : CharacterBody2D
 {
@@ -25,18 +26,13 @@ public partial class AiEntity : CharacterBody2D
 
 	public override void _Ready()
 	{
-		if (_movementTarget == null)
-		{
-			_movementTarget = new Marker2D();
-			AssignNewTarget();
-			SetMovementTarget();
-		}
+        terrain = GetNode<Terrain>("../../../Above Water");
 		CallDeferred("SetMovementTarget");
-		terrain = GetNode<Terrain>("../../../Above Water");
 	}
 
 	public void SetMovementTarget()
 	{
+		Debug.Print("Targetting terrain coordinate...: " + _movementTarget.ToString());
 		var targetTerrainCoordinate = WorldCoordinateToTerrainCoordinate(_movementTarget.GlobalPosition);
 		var currentTerrainCoordinate = WorldCoordinateToTerrainCoordinate(GlobalPosition);
 

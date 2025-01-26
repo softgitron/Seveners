@@ -3,26 +3,55 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-public partial class EnemySpawnerService : Node
+public partial class EnemySpawnerService : Node2D
 {
-	[Export]
+	//[Export]
 	PackedScene _enemy;
 	[Export]
 	int enemyCount;
 
 	private const int PIXEL_SIZE = 6;
 
-	public Terrain _terrain = null;
+	private Terrain _terrain = null;
 
+	//private static EnemySpawnerService _spawnerServiceInstance = null;
 
-    public void CreateEnemies()
+	//public static EnemySpawnerService GetSpawnerService(Terrain terrain)
+	//{
+	//	if (_spawnerServiceInstance == null)
+	//	{
+	//		_spawnerServiceInstance = new EnemySpawnerService(terrain);
+	//	}
+
+	//	return _spawnerServiceInstance;
+	//}
+
+	//private EnemySpawnerService(Terrain terrain)
+	//{
+	//	_terrain = terrain;
+	//}
+
+	public void Initialize(Terrain terrain)
+	{
+		_terrain = terrain;
+	}
+
+	public void CreateEnemies()
 	{
         var random = new Random();
+		var maxTries = 100;
+		var tries = 0;
 
         for (int i = 0; i < enemyCount; i++) {
 			var isPlacementValid = false;
+
 			while (!isPlacementValid)
 			{
+				if (tries >= maxTries)
+				{
+					break;
+				}
+				tries++;
                 var newRandomLocationSuggestion = getRandomLocation(random);
 
 				isPlacementValid = TryPlaceShip(newRandomLocationSuggestion);
@@ -39,8 +68,9 @@ public partial class EnemySpawnerService : Node
 
 	private Vector2 getRandomLocation(Random random)
 	{
-		var randomY = random.Next(_terrain.SafetyLimit, _terrain.Height * PIXEL_SIZE - _terrain.SafetyLimit);
-        var randomX = random.Next(_terrain.SafetyLimit, _terrain.Width * PIXEL_SIZE - _terrain.SafetyLimit);
+		
+		var randomY = random.Next(_terrain.SafetyLimit, Terrain.Height * PIXEL_SIZE - _terrain.SafetyLimit);
+        var randomX = random.Next(_terrain.SafetyLimit, Terrain.Width * PIXEL_SIZE - _terrain.SafetyLimit);
 
 		return new Vector2(randomX, randomY);
     }
@@ -52,7 +82,10 @@ public partial class EnemySpawnerService : Node
 		foreach (Vector2 spawnPos in collisionBoxCoords)
 		{
 			if (!_terrain.CanSpawnOn(spawnPos))
-				return false;
+			{
+				Debug.Print(spawnPos.ToString());
+                return false;
+            }
 		}
 		return true;
     }
@@ -61,10 +94,10 @@ public partial class EnemySpawnerService : Node
 	{
         var collisionBoxCorners = new List<Vector2>
         {
-            GetDynamicCoordFrom(5, 15, spawnPoint),
-            GetDynamicCoordFrom(-5, -15, spawnPoint),
-            GetDynamicCoordFrom(5, -15, spawnPoint),
-            GetDynamicCoordFrom(-5, 15, spawnPoint)
+            GetDynamicCoordFrom(10, 25, spawnPoint),
+            GetDynamicCoordFrom(-10, -25, spawnPoint),
+            GetDynamicCoordFrom(10, -25, spawnPoint),
+            GetDynamicCoordFrom(-10, 25, spawnPoint)
         };
 
 		return collisionBoxCorners;
@@ -79,10 +112,10 @@ public partial class EnemySpawnerService : Node
 	}
 
 	//Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	public void _on_timer_timeout()
 	{
-		base._Ready();
 		Debug.Print("Starting enemy gen...");
+		_enemy = (PackedScene)GD.Load("res://Roni/Enemy.tscn");
 		_terrain = GetNode<Terrain>("../Above Water");
 		CreateEnemies();
 		Debug.Print("Done creating enemies");
