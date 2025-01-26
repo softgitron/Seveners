@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Godot;
 
 public partial class Terrain : TileMapLayer
@@ -6,10 +5,7 @@ public partial class Terrain : TileMapLayer
 	public const int Width = 512;
 	public const int Height = 512;
 	[Export] public bool UnderTheWater = false;
-	[Export] public int SafetyLimit = 60;
-	[Export] public int ShallowLimit = 5;
-	[Export] public int BeachLimit = -10;
-	[Export] public int BoundaryDepth = 10;
+	[Export] public int SafetyLimit = 10;
 
 	// Values go from -0.5 to 0.5
 	const double NOISE_VALUE_NORMAL_W = -0.4;
@@ -50,7 +46,7 @@ public partial class Terrain : TileMapLayer
 		};
 		NavigationAgent = new()
 		{
-			Region = new Rect2I(0, 0, Width+2*BoundaryDepth, Height+ 2 * BoundaryDepth),
+			Region = new Rect2I(0, 0, Width, Height),
 			DiagonalMode = AStarGrid2D.DiagonalModeEnum.AtLeastOneWalkable,
 			DefaultComputeHeuristic = AStarGrid2D.Heuristic.Octile,
 			DefaultEstimateHeuristic = AStarGrid2D.Heuristic.Octile
@@ -101,14 +97,15 @@ public partial class Terrain : TileMapLayer
 
 	private bool Generate()
 	{
-		GenerateMapBoundary();
-
-		for (var y = BoundaryDepth; y < Height+BoundaryDepth; y++)
+		for (var y = 0; y < Height; y++)
 		{
-			for (var x = BoundaryDepth; x < Width+BoundaryDepth; x++)
+			for (var x = 0; x < Width; x++)
 			{
 				var coordinate = new Vector2I(x, y);
 				Vector2I texture;
+
+
+
 				var noiseValue = Noise.GetNoise2D(x, y);
 
 				if (noiseValue > NOISE_VALUE_MOUNTAIN)

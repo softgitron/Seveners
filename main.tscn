@@ -67,11 +67,13 @@ tile_set = SubResource("TileSet_kek77")
 collision_enabled = false
 script = ExtResource("2_3dxm6")
 UnderTheWater = true
+SafetyLimit = 60
 
 [node name="Above Water" type="TileMapLayer" parent="."]
 material = SubResource("ShaderMaterial_4c57u")
 tile_set = SubResource("TileSet_kek77")
 script = ExtResource("2_3dxm6")
+SafetyLimit = 60
 
 [node name="Player" parent="." node_paths=PackedStringArray("aboveWater", "belowWater") instance=ExtResource("4_trn2v")]
 position = Vector2(587, 329)
