@@ -51,7 +51,7 @@ animations = [{
 
 [node name="HumanControllableSubmarine" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 21
+collision_mask = 17
 script = ExtResource("1_g8j3o")
 DefaultSteerAngle = 0.03
 
@@ -65,9 +65,10 @@ shape = SubResource("CapsuleShape2D_5mi43")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="TorpedoSpawnPoint" type="Node2D" parent="."]
+[node name="TorpedoSpawnPoint" type="Node2D" parent="." node_paths=PackedStringArray("shootTimer")]
 position = Vector2(0, -46.91)
 script = ExtResource("3_3v0rv")
+shootTimer = NodePath("../PlayerShootTimer")
 
 [node name="Foam" type="Sprite2D" parent="."]
 visible = false
@@ -113,3 +114,10 @@ offset_bottom = 151.0
 
 [node name="Label" type="Label" parent="CanvasLayer/SubViewportContainer"]
 layout_mode = 2
+
+[node name="PlayerShootTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="PlayerShootTimer" to="TorpedoSpawnPoint" method="_on_player_shoot_timer_timeout"]

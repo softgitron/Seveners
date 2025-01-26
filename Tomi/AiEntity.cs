@@ -30,6 +30,15 @@ public partial class AiEntity : CharacterBody2D
 	private bool firing = false;
 	private Node2D player = null;
 
+	private float health = 100;
+
+	public void TakeDamage(float damage){
+		health -= damage;
+		if (health <= 0) {
+			QueueFree();
+		}
+	}
+
 	public override void _Ready()
 	{
 		terrain = GetNode<Terrain>("../../../Above Water");

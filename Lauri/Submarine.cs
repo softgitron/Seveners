@@ -147,6 +147,7 @@ public partial class Submarine : CharacterBody2D
 		CurrentGear = 1;
 		CurrentRpm = 0;
 		Velocity = Vector2.Zero;
+        health = 100;
 	}
 
 	private void _on_timer_timeout()
@@ -158,7 +159,7 @@ public partial class Submarine : CharacterBody2D
 	{
 
 	}
-	
+
 	public override void _Notification(int what)
 	{
 		if (what == NotificationExitTree) NodeCollection.Instance.UnregisterNode(this);
