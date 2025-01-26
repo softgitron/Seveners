@@ -29,8 +29,8 @@ public partial class Radar : Sprite2D
 				RadarBlip newBlip = (RadarBlip)blipScene.Instantiate();
 				newBlip.Position = node.GlobalPosition / 10;
 				newBlip.Rotation = node.GlobalRotation / 10;
-				GD.Print(Position);
-				GD.Print(Rotation);
+				//GD.Print(Position);
+				//GD.Print(Rotation);
 				this.AddChild(newBlip);
 				_NodeIdToBlip[nodeId] = newBlip;
 			}
@@ -39,7 +39,7 @@ public partial class Radar : Sprite2D
 				existingBlip.Position = node.GlobalPosition / 10;
 				existingBlip.Rotation = node.GlobalRotation;
 			}
-			GD.Print("Entity " + nodeId + " global position: " + node.GlobalPosition.ToString());
+			//GD.Print("Entity " + nodeId + " global position: " + node.GlobalPosition.ToString());
 		}
 
 		var nodesIdsToUnregister = new Array<ulong>();
@@ -51,7 +51,7 @@ public partial class Radar : Sprite2D
 			{
 				blipToFree.QueueFree();
 			}
-			GD.Print("Remove Entity " + nodeId);
+			//GD.Print("Remove Entity " + nodeId);
 			_NodeIdToBlip.Remove(nodeId);
 			nodesIdsToUnregister.Add(nodeId);
 		}
