@@ -42,7 +42,6 @@ public partial class MainGameLogic : Node
 	private void GenerateMap()
 	{
 		var seed = Random.Next();
-		seed = 0;
 		AboveWater.Initialize(seed);
 		BelowWater.Initialize(seed);
 	}
