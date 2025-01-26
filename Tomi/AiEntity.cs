@@ -54,7 +54,7 @@ public partial class AiEntity : CharacterBody2D
 
 	public void SetMovementTarget()
 	{
-		Debug.Print("Targetting terrain coordinate...: " + _movementTarget.ToString());
+		//Debug.Print("Targetting terrain coordinate...: " + _movementTarget.ToString());
 		var targetTerrainCoordinate = WorldCoordinateToTerrainCoordinate(_movementTarget.GlobalPosition);
 		var currentTerrainCoordinate = WorldCoordinateToTerrainCoordinate(GlobalPosition);
 
