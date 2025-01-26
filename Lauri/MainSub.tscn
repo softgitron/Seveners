@@ -117,6 +117,7 @@ layout_mode = 2
 stream = ExtResource("14_wblw6")
 volume_db = -10.0
 autoplay = true
+bus = &"SFX"
 parameters/looping = true
 
 [node name="PlayerShootTimer" type="Timer" parent="."]
