@@ -50,11 +50,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="HumanControllableSubmarine" type="CharacterBody2D"]
+[node name="HumanControllableSubmarine" type="CharacterBody2D" node_paths=PackedStringArray("gameEndTimer")]
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_g8j3o")
 DefaultSteerAngle = 0.03
+gameEndTimer = NodePath("Game End Timer")
 
 [node name="SubSprite" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, 0.999998)
@@ -123,4 +124,8 @@ wait_time = 0.5
 autostart = true
 ignore_time_scale = true
 
+[node name="Game End Timer" type="Timer" parent="."]
+wait_time = 4.0
+
 [connection signal="timeout" from="PlayerShootTimer" to="TorpedoSpawnPoint" method="_on_player_shoot_timer_timeout"]
+[connection signal="timeout" from="Game End Timer" to="." method="_on_game_end_timer_timeout"]

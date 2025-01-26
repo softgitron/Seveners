@@ -12,6 +12,7 @@ public partial class HumanControllableSubmarine : Submarine
 
 	private void _HandleInput(double delta)
 	{
+		if (health <= 0) return;
 		// Switching above/below water
 		bool switchLayer = Input.IsActionJustPressed("surface");
 		if (switchLayer)

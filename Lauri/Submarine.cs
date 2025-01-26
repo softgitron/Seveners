@@ -55,7 +55,8 @@ public partial class Submarine : CharacterBody2D
 	protected Vector2 up = new Vector2(0, -1);
 	private Vector2 zero = new Vector2(0, 0);
 
-	private float health = 100;
+	public float health = 100;
+    public bool isDead;
 	public override void _Ready()
 	{
 		_currentDirection = new Vector2(0, -1);
@@ -69,8 +70,17 @@ public partial class Submarine : CharacterBody2D
 	{
 		health -= damage;
 		EmitSignal(SignalName.HealthCanged, health);
+        if (health <= 0 && !isDead){
+            gameEndTimer.Start();
+            isDead = true;
+        }
 	}
 
+    [Export] Timer gameEndTimer;
+
+    public void _on_game_end_timer_timeout(){
+        GetTree().ChangeSceneToFile("res://Aku/lost_screen.tscn");
+    }
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
@@ -92,9 +102,17 @@ public partial class Submarine : CharacterBody2D
 		var collision = MoveAndCollide(Velocity * (float)delta);
 		if (collision != null)
 		{
-			GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
+			//GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
 			TakeDamage(5);
 			Velocity = -Velocity * 0.5f;
+		}
+	}
+
+	public override void _Process(double delta){
+		if (health <= 0){
+			if (Modulate.A >= 0.25){
+				Modulate -= new Color(0,0,0,(float)delta);
+			}
 		}
 	}
 
@@ -147,7 +165,7 @@ public partial class Submarine : CharacterBody2D
 		CurrentGear = 1;
 		CurrentRpm = 0;
 		Velocity = Vector2.Zero;
-        health = 100;
+		health = 100;
 	}
 
 	private void _on_timer_timeout()
