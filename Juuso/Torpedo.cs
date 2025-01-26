@@ -5,7 +5,7 @@ public partial class Torpedo : CharacterBody2D
 	public Vector2 pos;
 	public float rotation;
 	public float direction;
-	float speed = 300;
+	float speed = 400;
 	float lifetime = 4;
 	PackedScene explosionScene = (PackedScene)GD.Load("res://Roni/Explosion.tscn");
 
