@@ -39,7 +39,7 @@ public partial class AiEntity : CharacterBody2D
 		health -= damage;
 		if (health <= 0)
 		{
-			QueueFree();
+			//QueueFree();
 		}
 	}
 
