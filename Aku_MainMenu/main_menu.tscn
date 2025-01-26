@@ -1,0 +1,270 @@
+[gd_scene load_steps=9 format=3 uid="uid://c1x65tmk42iqk"]
+
+[ext_resource type="Script" uid="uid://d3upfeux6r87r" path="res://Aku_MainMenu/main_menu.cs" id="1_o3ukp"]
+[ext_resource type="Texture2D" uid="uid://cyey4v2not00c" path="res://Aku_MainMenu/MainBG.jpg" id="2_xeuur"]
+[ext_resource type="Texture2D" uid="uid://cc2w7i3cl6md2" path="res://Aku_MainMenu/mainTitle.png" id="3_0v47q"]
+[ext_resource type="StyleBox" uid="uid://n8b12wfo4fh6" path="res://Aku_MainMenu/ButtonNormal.tres" id="4_svjjs"]
+[ext_resource type="StyleBox" uid="uid://crsl072pcsx81" path="res://Aku_MainMenu/ButtonHover.tres" id="5_7d6wp"]
+[ext_resource type="StyleBox" uid="uid://dfayr6bvvrviy" path="res://Aku_MainMenu/ButtonHighlight.tres" id="6_ti4cp"]
+[ext_resource type="Texture2D" uid="uid://bjv5qh4um68cu" path="res://Aku_MainMenu/SettingsBG.jpg" id="7_agajt"]
+[ext_resource type="AudioStream" uid="uid://c267q7tckoqsw" path="res://Aku/MainMenu.ogg" id="8_6d5h6"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o3ukp")
+metadata/_edit_vertical_guides_ = [48.0]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xeuur")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="logo" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -340.0
+offset_top = -10.0
+offset_right = 876.0
+offset_bottom = 894.0
+grow_horizontal = 2
+scale = Vector2(0.477738, 0.408697)
+size_flags_vertical = 0
+texture = ExtResource("3_0v47q")
+
+[node name="VBoxMain" type="VBoxContainer" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = -274.0
+offset_right = 192.0
+offset_bottom = 678.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.739884, 0.746809)
+alignment = 1
+
+[node name="Start" type="Button" parent="VBoxMain" groups=["MainMenuButtons"]]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+theme_override_styles/hover = ExtResource("5_7d6wp")
+theme_override_styles/pressed = ExtResource("6_ti4cp")
+theme_override_styles/normal = ExtResource("4_svjjs")
+text = "Start"
+
+[node name="Options" type="Button" parent="VBoxMain" groups=["MainMenuButtons"]]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+theme_override_styles/hover = ExtResource("5_7d6wp")
+theme_override_styles/pressed = ExtResource("6_ti4cp")
+theme_override_styles/normal = ExtResource("4_svjjs")
+text = "Options"
+
+[node name="Quit" type="Button" parent="VBoxMain" groups=["MainMenuButtons"]]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+theme_override_styles/hover = ExtResource("5_7d6wp")
+theme_override_styles/pressed = ExtResource("6_ti4cp")
+theme_override_styles/normal = ExtResource("4_svjjs")
+text = "Quit
+"
+
+[node name="Options" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.0
+offset_top = -288.0
+offset_right = 225.0
+offset_bottom = 615.273
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.785982, 0.63922)
+texture = ExtResource("7_agajt")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -184.0
+offset_right = 104.0
+offset_bottom = 413.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.857844, 0.901941)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Options/VBoxContainer"]
+layout_mode = 2
+text = "Master volume"
+fit_content = true
+
+[node name="Master" type="HSlider" parent="Options/VBoxContainer" groups=["OptionsSlider"]]
+layout_mode = 2
+max_value = 6.0
+step = 0.2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Options/VBoxContainer"]
+layout_mode = 2
+text = "Music volume"
+fit_content = true
+
+[node name="Music" type="HSlider" parent="Options/VBoxContainer" groups=["OptionsSlider"]]
+layout_mode = 2
+max_value = 4.0
+step = 0.2
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Options/VBoxContainer"]
+layout_mode = 2
+text = "SFX volume"
+fit_content = true
+
+[node name="SFX" type="HSlider" parent="Options/VBoxContainer" groups=["OptionsSlider"]]
+layout_mode = 2
+max_value = 4.0
+step = 0.2
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="Options/VBoxContainer"]
+layout_mode = 2
+text = "Speech volume"
+fit_content = true
+
+[node name="Speech" type="HSlider" parent="Options/VBoxContainer" groups=["OptionsSlider"]]
+layout_mode = 2
+max_value = 6.0
+step = 0.2
+
+[node name="goBack" type="Button" parent="Options"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -145.0
+offset_top = 64.0
+offset_right = 193.0
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.691051, 0.718456)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = ExtResource("5_7d6wp")
+theme_override_styles/pressed = ExtResource("6_ti4cp")
+theme_override_styles/normal = ExtResource("4_svjjs")
+text = "Go back to 
+main menu"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_6d5h6")
+autoplay = true
+bus = &"Music"
+
+[node name="ExitControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -10.0
+offset_right = -62.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ExitControl"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.0
+offset_top = -115.0
+offset_right = 194.0
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.466667, 0.266667, 0, 1)
+theme_override_font_sizes/bold_font_size = 50
+bbcode_enabled = true
+text = "				
+						[b]Kiitos 
+					ohjelman 
+					käytöstä![/b]"
+fit_content = true
+
+[node name="actualExit" type="Button" parent="ExitControl"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -164.0
+offset_top = -435.0
+offset_right = 174.0
+offset_bottom = -233.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 44
+theme_override_styles/hover = ExtResource("5_7d6wp")
+theme_override_styles/pressed = ExtResource("6_ti4cp")
+theme_override_styles/normal = ExtResource("4_svjjs")
+text = "Ok"
+
+[connection signal="pressed" from="VBoxMain/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxMain/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxMain/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="Options/VBoxContainer/Master" to="." method="_on_master_value_changed"]
+[connection signal="value_changed" from="Options/VBoxContainer/Music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="Options/VBoxContainer/SFX" to="." method="_on_sfx_value_changed"]
+[connection signal="value_changed" from="Options/VBoxContainer/Speech" to="." method="_on_speech_value_changed"]
+[connection signal="pressed" from="Options/goBack" to="." method="_on_go_back_pressed"]
+[connection signal="pressed" from="ExitControl/actualExit" to="." method="_on_actual_exit_pressed"]

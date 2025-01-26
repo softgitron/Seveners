@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dfayr6bvvrviy"]
+
+[ext_resource type="Texture2D" uid="uid://b5tjkx3uen02l" path="res://Aku_MainMenu/ButtonPressed.png" id="1_y53sm"]
+
+[resource]
+texture = ExtResource("1_y53sm")
