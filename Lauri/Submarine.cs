@@ -166,6 +166,7 @@ public partial class Submarine : CharacterBody2D
 		CurrentRpm = 0;
 		Velocity = Vector2.Zero;
 		health = 100;
+		EmitSignal(SignalName.HealthCanged, health);
 	}
 
 	private void _on_timer_timeout()
