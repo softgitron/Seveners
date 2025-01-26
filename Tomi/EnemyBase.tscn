@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://o0fgjskur5n6"]
+[gd_scene load_steps=6 format=3 uid="uid://3gf0e8ipqnnp"]
 
 [ext_resource type="Script" uid="uid://dadk78pog2vxq" path="res://Tomi/AiEntity.cs" id="1_6qbxj"]
 [ext_resource type="Texture2D" uid="uid://dk1au0peyttiv" path="res://Tomi/Sukellusvene2.png" id="2_o4vbm"]

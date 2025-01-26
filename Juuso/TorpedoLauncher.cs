@@ -16,7 +16,7 @@ public partial class TorpedoLauncher : Node2D
 		Torpedo torpedo = (Torpedo)bulletScene.Instantiate();
 		torpedo.pos = GlobalPosition;
 		torpedo.direction = GlobalRotation;
-        GD.Print(Rotation);
+		GD.Print(Rotation);
 		torpedo.rotation = GlobalRotation;
 		GetTree().Root.AddChild(torpedo);
 	}

@@ -29,6 +29,7 @@ public partial class AiEntity : CharacterBody2D
 	{
 		CallDeferred("SetMovementTarget");
 		terrain = GetNode<Terrain>("../../Above Water");
+		NodeCollection.Instance.RegisterNode(this);
 	}
 
 	public void SetMovementTarget()
@@ -99,8 +100,7 @@ public partial class AiEntity : CharacterBody2D
 	
 	public override void _Notification(int what)
 	{
-		if (what == NotificationExitTree)
-			Debug.Print(this.GetInstanceId().ToString() + " Exited!");
+		if (what == NotificationExitTree) NodeCollection.Instance.UnregisterNode(this);
 	}
 
 	public override void _PhysicsProcess(double delta)

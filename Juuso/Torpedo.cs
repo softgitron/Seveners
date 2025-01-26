@@ -12,6 +12,7 @@ public partial class Torpedo : CharacterBody2D
 		base._Ready();
 		GlobalPosition = pos;
 		GlobalRotation = rotation;
+		NodeCollection.Instance.RegisterNode(this);
 	}
 	public void Initialize(Vector2 pos, float rotation)
 	{
@@ -40,4 +41,10 @@ public partial class Torpedo : CharacterBody2D
 			QueueFree();
 		}
 	}
+	
+	public override void _Notification(int what)
+	{
+		if (what == NotificationExitTree) NodeCollection.Instance.UnregisterNode(this);
+	}
+	
 }
