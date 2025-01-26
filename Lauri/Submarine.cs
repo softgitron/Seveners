@@ -76,7 +76,7 @@ public partial class Submarine : CharacterBody2D
 		}
 	}
 
-	[Export] Timer gameEndTimer;
+	[Export] public Timer gameEndTimer;
 
 	public void _on_game_end_timer_timeout(){
 		GetTree().ChangeSceneToFile("res://Aku/lost_screen.tscn");

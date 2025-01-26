@@ -21,7 +21,7 @@ public partial class EnemyControl : CharacterBody2D
 	public override void _Ready()
 	{
 		animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		homeBase = GetNode<Node2D>("/root/Main/Home");
+		homeBase = GetNode<Node2D>("/root/Main Root/Home");
 		nav = (NavigationAgent2D)GetNode("NavigationAgent2D");
 		swingAudio = GetNode<AudioStreamPlayer2D>("SwingAudio");
 		RandomizeSpeed();

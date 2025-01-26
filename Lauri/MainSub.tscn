@@ -95,12 +95,13 @@ stream_17/stream = ExtResource("24_w5vxs")
 stream_18/stream = ExtResource("25_524bh")
 stream_19/stream = ExtResource("26_fo50u")
 
-[node name="HumanControllableSubmarine" type="CharacterBody2D" node_paths=PackedStringArray("RandomShout")]
+[node name="HumanControllableSubmarine" type="CharacterBody2D" node_paths=PackedStringArray("RandomShout", "gameEndTimer")]
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_g8j3o")
 RandomShout = NodePath("RandomShout")
 DefaultSteerAngle = 0.03
+gameEndTimer = NodePath("Game End Timer")
 
 [node name="SubSprite" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, 0.999998)

@@ -24,13 +24,13 @@ public partial class Radar : Sprite2D
 		// jsut hardcode because hurry
 		const int PixelMultiplier = 6;
 		RadarScaleToWorldInPixels = (Terrain.Height * PixelMultiplier) / RadarPixelHeight;
-		
+
 		_NodeIdToBlip = new Dictionary<ulong, RadarBlip>();
-		_playerNode = GetTree().Root.GetNode<HumanControllableSubmarine>("Main6/Player");
+		_playerNode = GetTree().Root.GetNode<HumanControllableSubmarine>("Main Root/Player");
 		Debug.Assert(_playerNode != null, "Player node can not be null! Radar can not work!");
 		_radarCameraNode = GetNodeOrNull<Camera2D>(_radarCameraPath);
 		Debug.Assert(_radarCameraNode != null, "Radar camera node can not be null! Radar can not work!");
-		_terrain = GetTree().Root.GetNode<Terrain>("Main6/Above Water");
+		_terrain = GetTree().Root.GetNode<Terrain>("Main Root/Above Water");
 		Debug.Assert(_terrain != null, "Terrain node can not be null! Radar can not work!");
 	}
 
@@ -39,7 +39,7 @@ public partial class Radar : Sprite2D
 		SnapCameraToPlayer();
 		HandleRadarEntityLocations();
 	}
-	
+
 	private void SnapCameraToPlayer()
 	{
 		//Debug.Print("Camera global position: " + _radarCameraNode.GlobalPosition.ToString());
@@ -64,7 +64,7 @@ public partial class Radar : Sprite2D
 				RadarBlip newBlip = (RadarBlip)blipScene.Instantiate();
 				newBlip.Position = node.GlobalPosition / RadarScaleToWorldInPixels;
 				newBlip.Rotation = node.GlobalRotation / RadarScaleToWorldInPixels;
-				if (node is Goal) 
+				if (node is Goal)
 				{
 					newBlip.Modulate = new Color(0.5f, 0.5f, 0.5f, 1f);
 				}
@@ -86,7 +86,7 @@ public partial class Radar : Sprite2D
 		{
 			ulong nodeId = nodeIdToNode.Key;
 			RadarBlip blipToFree = null;
-			if (_NodeIdToBlip.TryGetValue(nodeId, out blipToFree)) 
+			if (_NodeIdToBlip.TryGetValue(nodeId, out blipToFree))
 			{
 				blipToFree.QueueFree();
 			}

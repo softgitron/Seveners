@@ -41,7 +41,7 @@ public partial class AiEntity : CharacterBody2D
 		if (health <= 0 && !isDead)
 		{
 			isDead = true;
-			PlayerStats stats = GetTree().Root.GetNode<PlayerStats>("Main5/CanvasLayer/PlayerStats");
+			PlayerStats stats = GetTree().Root.GetNode<PlayerStats>("Main Root/CanvasLayer/PlayerStats");
 			stats.enemiesDestroyed++;
 			stats.enemiesText.Text = "Enemies Destroyed: "+stats.enemiesDestroyed;
 		}
