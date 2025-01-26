@@ -75,7 +75,6 @@ script = ExtResource("2_3dxm6")
 
 [node name="Player" parent="." node_paths=PackedStringArray("aboveWater", "belowWater") instance=ExtResource("4_trn2v")]
 position = Vector2(587, 329)
-collision_mask = 21
 aboveWater = NodePath("../Above Water")
 belowWater = NodePath("../Under Water")
 

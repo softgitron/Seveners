@@ -30,6 +30,10 @@ public partial class Torpedo : CharacterBody2D
 				var player = (Submarine)collision.GetCollider();
 				player.TakeDamage(10);
 			}
+			if (collision.GetCollider() is AiEntity){
+				var enemy = (AiEntity)collision.GetCollider();
+				enemy.TakeDamage(50);
+			}
 			QueueFree();
 		}
 	}

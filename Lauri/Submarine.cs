@@ -158,7 +158,7 @@ public partial class Submarine : CharacterBody2D
 	{
 
 	}
-	
+
 	public override void _Notification(int what)
 	{
 		if (what == NotificationExitTree) NodeCollection.Instance.UnregisterNode(this);
