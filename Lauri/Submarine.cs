@@ -92,7 +92,7 @@ public partial class Submarine : CharacterBody2D
 		var collision = MoveAndCollide(Velocity * (float)delta);
 		if (collision != null)
 		{
-			GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
+			//GD.Print("I collided with ", ((Node)collision.GetCollider()).Name);
 			TakeDamage(5);
 			Velocity = -Velocity * 0.5f;
 		}

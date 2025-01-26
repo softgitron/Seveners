@@ -211,7 +211,7 @@ public partial class Terrain : TileMapLayer
 			{
 				if (x >= BoundaryDepth && x < Width + BoundaryDepth && y >= BoundaryDepth && y < Height + BoundaryDepth)
 				{
-					Debug.Print("In middle X: " + x);
+					//Debug.Print("In middle X: " + x);
 					continue;
 				}
 
