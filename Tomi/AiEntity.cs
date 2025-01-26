@@ -28,7 +28,7 @@ public partial class AiEntity : CharacterBody2D
 
 	public override void _Ready()
 	{
-        terrain = GetNode<Terrain>("../../../Above Water");
+		terrain = GetNode<Terrain>("../../../Above Water");
 		CallDeferred("SetMovementTarget");
 		NodeCollection.Instance.RegisterNode(this);
 	}
@@ -94,7 +94,7 @@ public partial class AiEntity : CharacterBody2D
 			{
 				isTargetValid = true;
 			}
-        }
+		}
 		_movementTarget.GlobalPosition = newTargetForPatrol;
 	}
 	

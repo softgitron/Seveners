@@ -18,10 +18,11 @@ public partial class MainGameLogic : Node
 	[Export]
 	public Terrain BelowWater;
 
-    [Export]
-    public EnemySpawnerService SpawnerService;
+	[Export]
+	public EnemySpawnerService SpawnerService;
 
-    public int level = 1;
+	public int level = 1;
+	[Signal] public delegate void LevelCangedEventHandler(int level);
 
 	private Random Random = new();
 
@@ -102,6 +103,7 @@ public partial class MainGameLogic : Node
 		if (node is HumanControllableSubmarine)
 		{
 			level++;
+			EmitSignal(SignalName.LevelCanged, level);
 			Initialize();
 		}
 	}
