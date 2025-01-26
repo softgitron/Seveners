@@ -56,7 +56,7 @@ public partial class Submarine : CharacterBody2D
 	private Vector2 zero = new Vector2(0, 0);
 
 	public float health = 100;
-    public bool isDead;
+	public bool isDead;
 	public override void _Ready()
 	{
 		_currentDirection = new Vector2(0, -1);
@@ -70,17 +70,17 @@ public partial class Submarine : CharacterBody2D
 	{
 		health -= damage;
 		EmitSignal(SignalName.HealthCanged, health);
-        if (health <= 0 && !isDead){
-            gameEndTimer.Start();
-            isDead = true;
-        }
+		if (health <= 0 && !isDead){
+			gameEndTimer.Start();
+			isDead = true;
+		}
 	}
 
-    [Export] Timer gameEndTimer;
+	[Export] Timer gameEndTimer;
 
-    public void _on_game_end_timer_timeout(){
-        GetTree().ChangeSceneToFile("res://Aku/lost_screen.tscn");
-    }
+	public void _on_game_end_timer_timeout(){
+		GetTree().ChangeSceneToFile("res://Aku/lost_screen.tscn");
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		base._PhysicsProcess(delta);
