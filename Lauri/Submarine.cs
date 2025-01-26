@@ -63,6 +63,7 @@ public partial class Submarine : CharacterBody2D
 	}
 
 	[Signal] public delegate void HealthCangedEventHandler(float newHealth);
+	[Signal] public delegate void GearCangedEventHandler(int metalGear);
 	public void TakeDamage(float damage)
 	{
 		health -= damage;
@@ -136,6 +137,8 @@ public partial class Submarine : CharacterBody2D
 
 		CurrentMaxRpm = Math.Max(Math.Min(BaseMaxRpm * Math.Abs(CurrentGear), MaxRpm), MinRpm);
 		//Debug.Print("CurrentMaxRpm changed to: " + CurrentMaxRpm.ToString());
+		EmitSignal(SignalName.GearCanged, CurrentGear);
+
 	}
 
 	public void Reset()

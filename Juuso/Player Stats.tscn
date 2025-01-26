@@ -2,17 +2,20 @@
 
 [ext_resource type="Script" uid="uid://b88fh74s682uh" path="res://Juuso/PlayerStats.cs" id="1_8um2a"]
 
-[node name="PlayerStats" type="Control" node_paths=PackedStringArray("healthBar")]
+[node name="PlayerStats" type="Control" node_paths=PackedStringArray("healthBar", "gearText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_8um2a")
-healthBar = NodePath("ProgressBar")
+healthBar = NodePath("Health Bar")
+gearText = NodePath("Gear")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="Health Bar" type="ProgressBar" parent="."]
 modulate = Color(1, 0.267492, 0.265256, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -23,7 +26,7 @@ offset_top = -57.0
 offset_right = 230.0
 offset_bottom = -30.0
 grow_vertical = 0
-value = 50.0
+value = 5.0
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -36,3 +39,15 @@ offset_right = 40.0
 offset_bottom = -60.0
 grow_vertical = 0
 text = "Health"
+
+[node name="Gear" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -108.0
+offset_right = 82.0
+offset_bottom = -85.0
+grow_vertical = 0
+text = "Gear: 5"
