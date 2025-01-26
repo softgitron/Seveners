@@ -4,6 +4,9 @@ using System.Diagnostics;
 
 public partial class HumanControllableSubmarine : Submarine
 {
+	[Export]
+	public AudioStreamPlayer2D RandomShout;
+
 	public override void _PhysicsProcess(double delta)
 	{
 		_HandleInput(delta);
@@ -39,9 +42,8 @@ public partial class HumanControllableSubmarine : Submarine
 		Debug.Print("ShipNode timer timed out");
 	}
 
-	private void HandleAudio()
+	public void _on_random_shout_timer_timeout()
 	{
-
+		RandomShout.Play();
 	}
-
 }

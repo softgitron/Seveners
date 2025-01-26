@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dn8jjea5g51u2"]
+[gd_scene load_steps=38 format=3 uid="uid://dn8jjea5g51u2"]
 
 [ext_resource type="Script" uid="uid://bs1yskhl7rvm0" path="res://Lauri/HumanControllableSubmarine.cs" id="1_g8j3o"]
 [ext_resource type="Texture2D" uid="uid://dxpos578r5ldd" path="res://Tomi/Sukellusvene.png" id="2_3v0rv"]
@@ -14,6 +14,26 @@
 [ext_resource type="Texture2D" uid="uid://dw1ree3tbvw8i" path="res://Aku/foamBoat/FoamBoat7.png" id="11_wblw6"]
 [ext_resource type="Texture2D" uid="uid://c8h4vu3hhqou7" path="res://Aku/foamBoat/FoamBoat8.png" id="12_at0dn"]
 [ext_resource type="AudioStream" uid="uid://lpekabrwfwa1" path="res://Roni/SonarSound.mp3" id="14_wblw6"]
+[ext_resource type="AudioStream" uid="uid://dn3keucnsdxom" path="res://Audio/FullSpeed.mp3" id="15_iamd5"]
+[ext_resource type="AudioStream" uid="uid://bd0btgf155a3s" path="res://Audio/SonarClear.mp3" id="16_orkbw"]
+[ext_resource type="AudioStream" uid="uid://qyhhp54as8vo" path="res://Audio/SonarContactConfirmed.mp3" id="17_8v2tj"]
+[ext_resource type="AudioStream" uid="uid://7p628l7py3nx" path="res://Audio/IdentifyContactCommand.mp3" id="18_mimom"]
+[ext_resource type="AudioStream" uid="uid://ciomoaydg8o3y" path="res://Audio/StartingToDiveResponse.mp3" id="19_d8xam"]
+[ext_resource type="AudioStream" uid="uid://ct3ej0fs8cleq" path="res://Audio/ForwardHalfPowerResponse.mp3" id="20_i2oqp"]
+[ext_resource type="AudioStream" uid="uid://pigigr3wmmu6" path="res://Audio/SonarContactSouthCommand.mp3" id="21_jixhk"]
+[ext_resource type="AudioStream" uid="uid://bttgr2135df56" path="res://Audio/MaintainDeepWaterPressure.mp3" id="22_6a500"]
+[ext_resource type="AudioStream" uid="uid://b3ytxno3yqyw1" path="res://Audio/CalculateTorpedoTrajcetory.mp3" id="23_s35mo"]
+[ext_resource type="AudioStream" uid="uid://du65hn1rgby67" path="res://Audio/ContactIdentifiedEnemyDetected.mp3" id="24_w5vxs"]
+[ext_resource type="AudioStream" uid="uid://0j4qtl8vnsom" path="res://Audio/DeepPressureMaintainedResposne.mp3" id="25_524bh"]
+[ext_resource type="AudioStream" uid="uid://bdcrwtkhs5dhy" path="res://Audio/RiggedForSilentRunningResposne.mp3" id="26_fo50u"]
+[ext_resource type="AudioStream" uid="uid://dq62dfoao4gtm" path="res://Audio/FireTorpedo2.mp3" id="27_s7baf"]
+[ext_resource type="AudioStream" uid="uid://b03sa70g8nco1" path="res://Audio/ForwardsCommand.mp3" id="28_brh08"]
+[ext_resource type="AudioStream" uid="uid://bc7s5p4hn7u3q" path="res://Audio/LUT University 21.mp3" id="29_ojldq"]
+[ext_resource type="AudioStream" uid="uid://btyqtgj8yie87" path="res://Audio/RigForSilentRunning.mp3" id="30_lsrlp"]
+[ext_resource type="AudioStream" uid="uid://bwegnr8xcty2v" path="res://Audio/TorpedoNumber2Fired.mp3" id="31_52cjh"]
+[ext_resource type="AudioStream" uid="uid://b26uww7yytc3m" path="res://Audio/MaximumSpeedAchieved.mp3" id="32_oktxt"]
+[ext_resource type="AudioStream" uid="uid://ff7gjl0si2hu" path="res://Audio/RightRudderConfirmed.mp3" id="33_extuv"]
+[ext_resource type="AudioStream" uid="uid://okfum2qf2t1l" path="res://Audio/DiveTo20MetersCommand.mp3" id="34_wquen"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5mi43"]
 height = 118.0
@@ -50,12 +70,37 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="HumanControllableSubmarine" type="CharacterBody2D" node_paths=PackedStringArray("gameEndTimer")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vhk5g"]
+random_pitch = 2.0
+random_volume_offset_db = 7.0
+streams_count = 20
+stream_0/stream = ExtResource("15_iamd5")
+stream_1/stream = ExtResource("16_orkbw")
+stream_2/stream = ExtResource("27_s7baf")
+stream_3/stream = ExtResource("28_brh08")
+stream_4/stream = ExtResource("29_ojldq")
+stream_5/stream = ExtResource("30_lsrlp")
+stream_6/stream = ExtResource("31_52cjh")
+stream_7/stream = ExtResource("32_oktxt")
+stream_8/stream = ExtResource("33_extuv")
+stream_9/stream = ExtResource("34_wquen")
+stream_10/stream = ExtResource("17_8v2tj")
+stream_11/stream = ExtResource("18_mimom")
+stream_12/stream = ExtResource("19_d8xam")
+stream_13/stream = ExtResource("20_i2oqp")
+stream_14/stream = ExtResource("21_jixhk")
+stream_15/stream = ExtResource("22_6a500")
+stream_16/stream = ExtResource("23_s35mo")
+stream_17/stream = ExtResource("24_w5vxs")
+stream_18/stream = ExtResource("25_524bh")
+stream_19/stream = ExtResource("26_fo50u")
+
+[node name="HumanControllableSubmarine" type="CharacterBody2D" node_paths=PackedStringArray("RandomShout")]
 collision_layer = 2
 collision_mask = 17
 script = ExtResource("1_g8j3o")
+RandomShout = NodePath("RandomShout")
 DefaultSteerAngle = 0.03
-gameEndTimer = NodePath("Game End Timer")
 
 [node name="SubSprite" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, 0.999998)
@@ -127,5 +172,15 @@ ignore_time_scale = true
 [node name="Game End Timer" type="Timer" parent="."]
 wait_time = 4.0
 
+[node name="RandomShout" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_vhk5g")
+volume_db = -5.0
+pitch_scale = 1.25
+
+[node name="RandomShoutTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [connection signal="timeout" from="PlayerShootTimer" to="TorpedoSpawnPoint" method="_on_player_shoot_timer_timeout"]
 [connection signal="timeout" from="Game End Timer" to="." method="_on_game_end_timer_timeout"]
+[connection signal="timeout" from="RandomShoutTimer" to="." method="_on_random_shout_timer_timeout"]
