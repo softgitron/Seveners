@@ -41,10 +41,10 @@ public partial class Torpedo : CharacterBody2D
 			QueueFree();
 		}
 	}
-	
+
 	public override void _Notification(int what)
 	{
 		if (what == NotificationExitTree) NodeCollection.Instance.UnregisterNode(this);
 	}
-	
+
 }
