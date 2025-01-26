@@ -63,7 +63,8 @@ public partial class Submarine : CharacterBody2D
 	}
 
 	[Signal] public delegate void HealthCangedEventHandler(float newHealth);
-	public void TakeDamage(float damage){
+	public void TakeDamage(float damage)
+	{
 		health -= damage;
 		EmitSignal(SignalName.HealthCanged, health);
 	}
@@ -101,6 +102,7 @@ public partial class Submarine : CharacterBody2D
 		Depth = depth;
 		isAboveWater = !isAboveWater;
 		aboveMaterial.SetShaderParameter("isUnderWater", !isAboveWater);
+        aboveWater.CollisionEnabled = isAboveWater;
 		belowWater.CollisionEnabled = !isAboveWater; // This causes lag spike! TODO: Maybe better approach would be to change what colliders player reacts to (so no hiding colliders)
 		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Visible = isAboveWater;
 	}
@@ -108,7 +110,7 @@ public partial class Submarine : CharacterBody2D
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public void Steer(int direction)
 	{
-		float degrees = (float)(direction * (DefaultSteerAngle * (float)(1/Math.Pow(Math.E, 0.01*CurrentSpeed))));
+		float degrees = (float)(direction * (DefaultSteerAngle * (float)(1 / Math.Pow(Math.E, 0.01 * CurrentSpeed))));
 		//Debug.Print("Degrees: " + degrees.ToString());
 
 		//Debug.Print("Turn factor: " + (1 / Math.Pow(Math.E, 0.01*CurrentSpeed)).ToString());
