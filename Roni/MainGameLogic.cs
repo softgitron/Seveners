@@ -36,7 +36,7 @@ public partial class MainGameLogic : Node
 	{
 		Player.Reset();
 		GenerateMap();
-		// SpawnPlayerAndGoal();
+		SpawnPlayerAndGoal();
 	}
 
 	private void GenerateMap()
