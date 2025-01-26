@@ -107,6 +107,11 @@ public partial class MainGameLogic : Node
 			level++;
 			EmitSignal(SignalName.LevelCanged, level);
 			Initialize();
+			var children = SpawnerService.GetChildren();
+			foreach (var child in children)
+			{
+				child.QueueFree();
+			}
 		}
 	}
 
