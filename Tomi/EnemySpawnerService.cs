@@ -8,7 +8,7 @@ public partial class EnemySpawnerService : Node2D
 	//[Export]
 	PackedScene _enemy;
 	[Export]
-	int enemyCount;
+	public int enemyCount;
 
 	private const int PIXEL_SIZE = 6;
 
@@ -38,11 +38,12 @@ public partial class EnemySpawnerService : Node2D
 
 	public void CreateEnemies()
 	{
-        var random = new Random();
+		var random = new Random();
 		var maxTries = 100;
 		var tries = 0;
 
-        for (int i = 0; i < enemyCount; i++) {
+		for (int i = 0; i < enemyCount; i++)
+		{
 			var isPlacementValid = false;
 
 			while (!isPlacementValid)
@@ -52,7 +53,7 @@ public partial class EnemySpawnerService : Node2D
 					break;
 				}
 				tries++;
-                var newRandomLocationSuggestion = getRandomLocation(random);
+				var newRandomLocationSuggestion = getRandomLocation(random);
 
 				isPlacementValid = TryPlaceShip(newRandomLocationSuggestion);
 				if (isPlacementValid)
@@ -60,20 +61,20 @@ public partial class EnemySpawnerService : Node2D
 					var newEnemy = (Node2D)_enemy.Instantiate();
 					newEnemy.GlobalPosition = newRandomLocationSuggestion;
 					AddChild(newEnemy);
-                    Debug.Print("Enemy created at: " + newRandomLocationSuggestion.ToString());
-                }
-            }
+					Debug.Print("Enemy created at: " + newRandomLocationSuggestion.ToString());
+				}
+			}
 		}
 	}
 
 	private Vector2 getRandomLocation(Random random)
 	{
-		
+
 		var randomY = random.Next(_terrain.SafetyLimit, Terrain.Height * PIXEL_SIZE - _terrain.SafetyLimit);
-        var randomX = random.Next(_terrain.SafetyLimit, Terrain.Width * PIXEL_SIZE - _terrain.SafetyLimit);
+		var randomX = random.Next(_terrain.SafetyLimit, Terrain.Width * PIXEL_SIZE - _terrain.SafetyLimit);
 
 		return new Vector2(randomX, randomY);
-    }
+	}
 
 	private bool TryPlaceShip(Vector2 spawnPoint)
 	{
@@ -84,24 +85,24 @@ public partial class EnemySpawnerService : Node2D
 			if (!_terrain.CanSpawnOn(spawnPos))
 			{
 				Debug.Print(spawnPos.ToString());
-                return false;
-            }
+				return false;
+			}
 		}
 		return true;
-    }
+	}
 
 	private List<Vector2> GetCollisionBoxCoords(Vector2 spawnPoint)
 	{
-        var collisionBoxCorners = new List<Vector2>
-        {
-            GetDynamicCoordFrom(10, 25, spawnPoint),
-            GetDynamicCoordFrom(-10, -25, spawnPoint),
-            GetDynamicCoordFrom(10, -25, spawnPoint),
-            GetDynamicCoordFrom(-10, 25, spawnPoint)
-        };
+		var collisionBoxCorners = new List<Vector2>
+		{
+			GetDynamicCoordFrom(10, 25, spawnPoint),
+			GetDynamicCoordFrom(-10, -25, spawnPoint),
+			GetDynamicCoordFrom(10, -25, spawnPoint),
+			GetDynamicCoordFrom(-10, 25, spawnPoint)
+		};
 
 		return collisionBoxCorners;
-    }
+	}
 
 	private Vector2 GetDynamicCoordFrom(int width, int height, Vector2 pointFrom)
 	{
@@ -119,5 +120,15 @@ public partial class EnemySpawnerService : Node2D
 		_terrain = GetNode<Terrain>("../Above Water");
 		CreateEnemies();
 		Debug.Print("Done creating enemies");
+	}
+
+	public void ResetEnemies()
+	{
+		var children = GetChildren();
+		foreach (var child in children)
+		{
+			child.QueueFree();
+		}
+		CreateEnemies();
 	}
 }

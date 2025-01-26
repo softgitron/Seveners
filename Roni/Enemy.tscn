@@ -12,19 +12,21 @@ size = Vector2(170, 820)
 radius = 350.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_85mac"]
-radius = 500.0
+radius = 650.0
 
 [node name="Enemy" type="Node2D"]
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_path", "_torpedoLaunch")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_movementTarget", "_path", "_torpedoLaunch", "FireTimer")]
 collision_layer = 4
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_0nn7a")
 _randomWaypointDistanceMultiplier = 6.0
-_movementSpeed = 1000.0
+_turnSpeed = 0.03
 _movementTarget = NodePath("../Marker2D")
 _path = NodePath("Path2D")
 _torpedoLaunch = NodePath("TorpedoSpawnPoint")
+FireTimer = NodePath("FireTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(0.1, 0.1)
@@ -60,7 +62,6 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_85mac")
 
 [node name="NavigationTimer" type="Timer" parent="CharacterBody2D"]
-wait_time = 2.0
 autostart = true
 
 [node name="Marker2D" type="Marker2D" parent="."]

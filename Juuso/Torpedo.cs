@@ -6,7 +6,9 @@ public partial class Torpedo : CharacterBody2D
 	public float rotation;
 	public float direction;
 	float speed = 300;
-	float lifetime = 10;
+	float lifetime = 4;
+	PackedScene explosionScene = (PackedScene)GD.Load("res://Roni/Explosion.tscn");
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -28,12 +30,14 @@ public partial class Torpedo : CharacterBody2D
 			if (collision.GetCollider() is Submarine)
 			{
 				var player = (Submarine)collision.GetCollider();
-				player.TakeDamage(10);
+				player.TakeDamage(15);
 			}
-			if (collision.GetCollider() is AiEntity){
+			if (collision.GetCollider() is AiEntity)
+			{
 				var enemy = (AiEntity)collision.GetCollider();
 				enemy.TakeDamage(50);
 			}
+			SpawnExplosion();
 			QueueFree();
 		}
 	}
@@ -42,6 +46,7 @@ public partial class Torpedo : CharacterBody2D
 		lifetime -= (float)delta;
 		if (lifetime < 0)
 		{
+			SpawnExplosion();
 			QueueFree();
 		}
 	}
@@ -51,4 +56,10 @@ public partial class Torpedo : CharacterBody2D
 		if (what == NotificationExitTree) NodeCollection.Instance.UnregisterNode(this);
 	}
 
+	public void SpawnExplosion()
+	{
+		Node2D explosion = (Node2D)explosionScene.Instantiate();
+		explosion.GlobalPosition = GlobalPosition;
+		GetTree().Root.AddChild(explosion);
+	}
 }

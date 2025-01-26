@@ -21,6 +21,8 @@ public partial class AiEntity : CharacterBody2D
 	public Node2D _torpedoLaunch;
 	[Export]
 	public Terrain terrain;
+	[Export]
+	public Timer FireTimer;
 
 	private PackedScene bulletScene = (PackedScene)GD.Load("res://Juuso/TorpedoEnemy.tscn");
 	private const float CorrectionAngle = (float)Math.PI / 2;
@@ -32,15 +34,19 @@ public partial class AiEntity : CharacterBody2D
 
 	private float health = 100;
 
-	public void TakeDamage(float damage){
+	public void TakeDamage(float damage)
+	{
 		health -= damage;
-		if (health <= 0) {
-			QueueFree();
+		if (health <= 0)
+		{
+			//QueueFree();
 		}
 	}
 
 	public override void _Ready()
 	{
+		var random = new Random();
+		FireTimer.WaitTime = 1.8 + random.NextDouble() / 4;
 		terrain = GetNode<Terrain>("../../../Above Water");
 		CallDeferred("SetMovementTarget");
 		NodeCollection.Instance.RegisterNode(this);
@@ -48,7 +54,7 @@ public partial class AiEntity : CharacterBody2D
 
 	public void SetMovementTarget()
 	{
-		Debug.Print("Targetting terrain coordinate...: " + _movementTarget.ToString());
+		//Debug.Print("Targetting terrain coordinate...: " + _movementTarget.ToString());
 		var targetTerrainCoordinate = WorldCoordinateToTerrainCoordinate(_movementTarget.GlobalPosition);
 		var currentTerrainCoordinate = WorldCoordinateToTerrainCoordinate(GlobalPosition);
 
@@ -116,6 +122,17 @@ public partial class AiEntity : CharacterBody2D
 		if (what == NotificationExitTree) NodeCollection.Instance.UnregisterNode(this);
 	}
 
+	public override void _Process(double delta)
+	{
+		if (health <= 0)
+		{
+			Modulate -= new Color(0, 0, 0, (float)delta);
+			if (Modulate.A <= 0)
+			{
+				QueueFree();
+			}
+		}
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		if (navigationPoints.Count == 0)
@@ -184,7 +201,10 @@ public partial class AiEntity : CharacterBody2D
 
 	public void _on_timer_timeout()
 	{
-		Fire();
+		if (health > 0)
+		{
+			Fire();
+		}
 	}
 
 	public void _on_navigation_timer_timeout()

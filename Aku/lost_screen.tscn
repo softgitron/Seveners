@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ee7uqei2rxa"]
+
+[ext_resource type="Script" uid="uid://dwn0yc3yunv21" path="res://Aku/WinScreen.cs" id="1_sjpf7"]
+[ext_resource type="Texture2D" uid="uid://b5fbihplk2x18" path="res://Aku/GameLost.jpg" id="2_sjpf7"]
+[ext_resource type="StyleBox" uid="uid://crsl072pcsx81" path="res://Aku_MainMenu/ButtonHover.tres" id="3_jb7xq"]
+[ext_resource type="StyleBox" uid="uid://dfayr6bvvrviy" path="res://Aku_MainMenu/ButtonHighlight.tres" id="4_k1e88"]
+[ext_resource type="StyleBox" uid="uid://n8b12wfo4fh6" path="res://Aku_MainMenu/ButtonNormal.tres" id="5_m1506"]
+
+[node name="winScreen" type="Node2D"]
+script = ExtResource("1_sjpf7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_sjpf7")
+
+[node name="actualExit" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 200)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 872.0
+offset_right = 351.0
+offset_bottom = 1074.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 44
+theme_override_styles/hover = ExtResource("3_jb7xq")
+theme_override_styles/pressed = ExtResource("4_k1e88")
+theme_override_styles/normal = ExtResource("5_m1506")
+text = "Continue"
+
+[connection signal="pressed" from="actualExit" to="." method="_on_actual_exit_pressed"]
