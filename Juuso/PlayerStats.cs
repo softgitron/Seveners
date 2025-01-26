@@ -11,6 +11,9 @@ public partial class PlayerStats : Control
 
 	[Export] private Label levelText;
 
+	[Export] public Label enemiesText;
+	public int enemiesDestroyed;
+
 	public override void _Ready()
 	{
 		healthBar.Value = 100;

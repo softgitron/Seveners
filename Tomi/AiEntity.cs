@@ -33,13 +33,17 @@ public partial class AiEntity : CharacterBody2D
 	private Node2D player = null;
 
 	private float health = 100;
+	private bool isDead;
 
 	public void TakeDamage(float damage)
 	{
 		health -= damage;
-		if (health <= 0)
+		if (health <= 0 && !isDead)
 		{
-			//QueueFree();
+			isDead = true;
+			PlayerStats stats = GetTree().Root.GetNode<PlayerStats>("Main5/CanvasLayer/PlayerStats");
+			stats.enemiesDestroyed++;
+			stats.enemiesText.Text = "Enemies Destroyed: "+stats.enemiesDestroyed;
 		}
 	}
 

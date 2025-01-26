@@ -105,10 +105,14 @@ public partial class MainGameLogic : Node
 		if (node is HumanControllableSubmarine)
 		{
 			level++;
-			EmitSignal(SignalName.LevelCanged, level);
-			Initialize();
-			SpawnerService.enemyCount += 3;
-			SpawnerService.ResetEnemies();
+			if (level > 5){
+				GetTree().ChangeSceneToFile("res://Aku/win_screen.tscn");
+			} else {
+				EmitSignal(SignalName.LevelCanged, level);
+				Initialize();
+				SpawnerService.enemyCount += 3;
+				SpawnerService.ResetEnemies();
+			}
 		}
 	}
 
