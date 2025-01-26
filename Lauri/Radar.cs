@@ -46,6 +46,11 @@ public partial class Radar : Sprite2D
 		foreach (var nodeIdToNode in NodeCollection.Instance.NodesToUnRegister)
 		{
 			ulong nodeId = nodeIdToNode.Key;
+			RadarBlip blipToFree = null;
+			if (_NodeIdToBlip.TryGetValue(nodeId, out blipToFree)) 
+			{
+				blipToFree.QueueFree();
+			}
 			GD.Print("Remove Entity " + nodeId);
 			_NodeIdToBlip.Remove(nodeId);
 			nodesIdsToUnregister.Add(nodeId);

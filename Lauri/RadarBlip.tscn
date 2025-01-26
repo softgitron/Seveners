@@ -15,5 +15,6 @@ animations = [{
 }]
 
 [node name="RadarBlip" type="AnimatedSprite2D"]
+scale = Vector2(0.195, 0.195)
 sprite_frames = SubResource("SpriteFrames_y8n72")
 script = ExtResource("2_mwdft")
